@@ -1,2 +1,32 @@
-# battery-swapping-payment-system
-Battery Swapping Payment System
+# 铁塔换电支付系统 - 先享后付签约Demo
+
+## 项目说明
+本项目为纯前端H5 Demo，用于演示"先享后付"套餐的支付宝签约流程。
+
+**特点：**
+- 纯前端实现，无后端接口
+- 模拟完整签约流程
+- 页面间数据通过URL参数传递
+
+## 签约流程
+```
+铁塔收银台 → 订单确认(信息) → 订单确认(告知书) → 人脸识别 → 支付宝签约 → 签约成功
+```
+
+## 页面说明
+| 页面 | 文件 | 说明 |
+|------|------|------|
+| 铁塔收银台 | index.html | 套餐展示，购买入口 |
+| 订单确认-信息 | order-confirm.html | 订单详情确认 |
+| 订单确认-告知书 | disclosure.html | 告知书阅读确认 |
+| 人脸识别 | face-recognition.html | 模拟人脸认证 |
+| 支付宝签约 | alipay-sign.html | 模拟支付宝签约 |
+| 签约成功 | order-success.html | 签约结果展示 |
+
+## 运行方式
+直接用浏览器打开 `index.html` 即可体验完整流程。
+
+## 技术栈
+- HTML5
+- CSS3
+- JavaScript (原生)
