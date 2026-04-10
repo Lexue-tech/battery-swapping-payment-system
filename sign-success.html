@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>先享后付支付系统 - 签约并支付完成</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="mobile-page">
+    <div class="topbar">
+      <button class="left">×</button>
+      银行卡付款
+    </div>
+    <div class="success-icon">✓</div>
+    <h2 class="center" style="font-size:40px;margin:8px 0;">签约并支付成功</h2>
+    <section class="section" style="font-size:28px;line-height:1.9;">
+      <div class="row"><span class="muted">商户订单信息</span><strong id="pkgText"></strong></div>
+      <div class="row"><span class="muted">金额</span><strong id="amountText"></strong></div>
+    </section>
+    <button class="btn btn-blue success-btn" id="backMerchant">返回商户</button>
+    <div class="success-note"><span id="autoSec">5</span>s后自动返回</div>
+  </main>
+  <script src="./app.js"></script>
+  <script>
+    const order = readOrder();
+    updateAmountText("#pkgText", order.packageName || "先享后付套餐");
+    updateAmountText("#amountText", `${toFixedAmount(order.amount || 199)}元`);
+    document.getElementById("backMerchant").addEventListener("click", () => go("./tower-order-success.html"));
+    let sec = 5;
+    const timer = setInterval(() => {
+      sec -= 1;
+      updateAmountText("#autoSec", sec);
+      if (sec <= 0) {
+        clearInterval(timer);
+        go("./tower-order-success.html");
+      }
+    }, 1000);
+  </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>铁塔换电APP - 订单成功</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="mobile-page">
+    <div class="topbar">铁塔换电APP</div>
+    <div class="success-icon">✓</div>
+    <h2 class="center" style="font-size:40px;margin-top:4px;">先享后付签约成功</h2>
+    <p class="center" style="color:#6b7280;font-size:22px;">您已完成签约并支付，可继续换电服务</p>
+    <section class="section card" style="margin:0 16px;padding:16px;">
+      <div class="row"><span class="muted">订单状态</span><strong style="color:#16a34a;">成功</strong></div>
+      <div class="row"><span class="muted">套餐</span><strong id="pkgText"></strong></div>
+      <div class="row"><span class="muted">实付金额</span><strong id="amountText"></strong></div>
+      <div class="row"><span class="muted">签约时间</span><strong id="timeText"></strong></div>
+    </section>
+    <button class="btn btn-primary success-btn" id="backCashier">返回收银台</button>
+  </main>
+  <script src="./app.js"></script>
+  <script>
+    const order = readOrder();
+    updateAmountText("#pkgText", order.packageName || "先享后付套餐");
+    updateAmountText("#amountText", `${toFixedAmount(order.amount || 199)}元`);
+    const d = new Date();
+    updateAmountText("#timeText", `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")} ${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}`);
+    document.getElementById("backCashier").addEventListener("click", () => go("./index.html?success=1"));
+  </script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>先享后付支付系统 - 订单确认</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="mobile-page">
+    <div class="topbar">
+      <button class="left" onclick="history.back()">‹</button>
+      运营商金融合约业务订单
+    </div>
+    <section class="order-head">
+      <div style="font-size:30px;font-weight:700;">● 山东测试门店</div>
+      <div style="opacity:.9;margin-top:6px;font-size:20px;">山东 济南 历下区 舜耕路1号</div>
+      <div class="order-amount card">
+        <div style="color:#6b7280;font-size:22px;">先享金额</div>
+        <div><strong id="amountText">199.00</strong>元</div>
+      </div>
+    </section>
+    <section class="section">
+      <div class="card detail-table">
+        <div style="font-size:24px;font-weight:700;margin-bottom:10px;">● 订单详情</div>
+        <div class="row"><span class="muted">订单编号</span><strong id="orderNo"></strong></div>
+        <div class="row"><span class="muted">商品直降</span><strong>700.00元</strong></div>
+        <div class="row"><span class="muted">支付方式</span><strong>支付宝先享</strong></div>
+        <div class="row"><span class="muted">订单期数</span><strong id="installment"></strong></div>
+        <div class="row"><span class="muted">每期交易情况</span><strong id="stageInfo"></strong></div>
+      </div>
+      <div style="margin-top:16px;color:#6b7280;font-size:18px;line-height:1.7;">
+        温馨提示：<br>
+        1. 已知并办理支付宝先享业务，每月及时缴纳还款费用。<br>
+        2. 履约后可查询分期计划与订单状态。<br>
+        3. 如有问题可咨询在线客服。
+      </div>
+    </section>
+    <div class="bottom-action">
+      <div class="agreement-check">点击即同意《中国联通金融合约业务告知书》等授权协议</div>
+      <button class="btn btn-blue" id="nextBtn">我已知晓业务，去签约</button>
+    </div>
+  </main>
+  <script src="./app.js"></script>
+  <script>
+    const order = readOrder();
+    updateAmountText("#amountText", toFixedAmount(order.amount || 199));
+    updateAmountText("#orderNo", order.orderNo || "");
+    updateAmountText("#installment", order.installment || "36月");
+    updateAmountText("#stageInfo", order.stageInfo || "第1期24.15元，第2-36期3.91元");
+    document.getElementById("nextBtn").addEventListener("click", () => go("./agreement.html"));
+  </script>
+</body>
+</html>

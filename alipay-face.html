@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>支付宝 - 身份验证</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="mobile-page alipay">
+    <div class="alipay-header">身份验证</div>
+    <section class="face-box" id="step1">
+      <div style="font-size:76px;">🛡️</div>
+      <h2>测试商户</h2>
+      <p style="line-height:1.7;color:#4b5563;">根据测试商户的签约管理要求，使用服务前您需要通过实名认证，并授权查询如下信息：</p>
+      <p style="line-height:1.8;color:#4b5563;">· 你的本人脸认证结果<br>· 本次认证过程中拍摄的人脸照片</p>
+      <button class="btn btn-blue" id="agreeAuth" style="margin-top:18px;">同意协议并认证</button>
+    </section>
+
+    <section class="face-box" id="step2" style="display:none;">
+      <h2>拍摄本人脸，请确保正对手机，光线充足</h2>
+      <div class="face-circle">🙂</div>
+      <button class="btn btn-blue" id="captureBtn">采集本人脸</button>
+    </section>
+
+    <section class="face-box" id="step3" style="display:none;">
+      <h2>拿起手机，眨眨眼</h2>
+      <div class="face-circle">🧑</div>
+      <p>活体识别中，<span class="count" id="countText">3</span>秒后自动进入签约页</p>
+    </section>
+  </main>
+  <script src="./app.js"></script>
+  <script>
+    const step1 = document.getElementById("step1");
+    const step2 = document.getElementById("step2");
+    const step3 = document.getElementById("step3");
+    document.getElementById("agreeAuth").addEventListener("click", () => {
+      step1.style.display = "none";
+      step2.style.display = "block";
+    });
+    document.getElementById("captureBtn").addEventListener("click", () => {
+      step2.style.display = "none";
+      step3.style.display = "block";
+      let count = 3;
+      const countText = document.getElementById("countText");
+      const timer = setInterval(() => {
+        count -= 1;
+        countText.textContent = String(count);
+        if (count <= 0) {
+          clearInterval(timer);
+          go("./alipay-sign.html");
+        }
+      }, 1000);
+    });
+  </script>
+</body>
+</html>

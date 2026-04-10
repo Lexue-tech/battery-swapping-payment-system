@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>先享后付支付系统 - 协议签署</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="mobile-page">
+    <div class="topbar">
+      <button class="left" onclick="history.back()">‹</button>
+      用户签署
+    </div>
+    <div class="agreement-wrap">
+      <article class="agreement-content" id="agreementContent"></article>
+      <div class="signature-box">
+        <div class="signature-tip" id="scrollTip">请先阅读到协议底部，再进行手写电子签名</div>
+        <canvas class="signature-canvas" id="signatureCanvas"></canvas>
+        <div class="signature-actions">
+          <button class="btn btn-light" id="clearBtn">清除签名</button>
+          <button class="btn btn-blue" id="submitBtn" disabled>完成签名并去支付宝</button>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="./app.js"></script>
+  <script>
+    const content = document.getElementById("agreementContent");
+    const scrollTip = document.getElementById("scrollTip");
+    const submitBtn = document.getElementById("submitBtn");
+    const canvas = document.getElementById("signatureCanvas");
+    const clearBtn = document.getElementById("clearBtn");
+    const ctx = canvas.getContext("2d");
+    let reachedBottom = false;
+    let hasSign = false;
+    let drawing = false;
+
+    function parseMarkdown(md) {
+      const lines = md.split("\n");
+      let html = "";
+      for (const raw of lines) {
+        const line = raw.trim();
+        if (!line) {
+          html += "<p style='height:8px;'></p>";
+          continue;
+        }
+        if (line.startsWith("# ")) {
+          html += `<h1>${line.slice(2)}</h1>`;
+          continue;
+        }
+        if (line.startsWith("## ")) {
+          html += `<h2>${line.slice(3)}</h2>`;
+          continue;
+        }
+        if (line.startsWith("### ")) {
+          html += `<h3>${line.slice(4)}</h3>`;
+          continue;
+        }
+        if (line.startsWith("|")) {
+          html += `<pre style="white-space:pre-wrap;border:1px solid #e5e7eb;padding:8px;border-radius:8px;">${line}</pre>`;
+          continue;
+        }
+        html += `<p style="font-size:17px;">${line}</p>`;
+      }
+      return html;
+    }
+
+    fetch("./docs/requirements/pages/铁塔换电套餐协议/协议.md")
+      .then((res) => res.text())
+      .then((md) => {
+        content.innerHTML = parseMarkdown(md);
+      });
+
+    function resizeCanvas() {
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = rect.width * window.devicePixelRatio;
+      canvas.height = rect.height * window.devicePixelRatio;
+      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+      ctx.lineWidth = 2.5;
+      ctx.lineCap = "round";
+      ctx.strokeStyle = "#111827";
+    }
+
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
+
+    function updateSubmitState() {
+      submitBtn.disabled = !(reachedBottom && hasSign);
+    }
+
+    content.addEventListener("scroll", () => {
+      const distance = content.scrollHeight - content.scrollTop - content.clientHeight;
+      if (distance < 8) {
+        reachedBottom = true;
+        scrollTip.textContent = "已阅读到底部，请在下方手写电子签名";
+        updateSubmitState();
+      }
+    });
+
+    function getPoint(e) {
+      const rect = canvas.getBoundingClientRect();
+      const touch = e.touches ? e.touches[0] : e;
+      return {
+        x: touch.clientX - rect.left,
+        y: touch.clientY - rect.top
+      };
+    }
+
+    function startDraw(e) {
+      drawing = true;
+      const p = getPoint(e);
+      ctx.beginPath();
+      ctx.moveTo(p.x, p.y);
+      e.preventDefault();
+    }
+
+    function moveDraw(e) {
+      if (!drawing) {
+        return;
+      }
+      const p = getPoint(e);
+      ctx.lineTo(p.x, p.y);
+      ctx.stroke();
+      hasSign = true;
+      updateSubmitState();
+      e.preventDefault();
+    }
+
+    function endDraw() {
+      drawing = false;
+    }
+
+    canvas.addEventListener("mousedown", startDraw);
+    canvas.addEventListener("mousemove", moveDraw);
+    window.addEventListener("mouseup", endDraw);
+    canvas.addEventListener("touchstart", startDraw, { passive: false });
+    canvas.addEventListener("touchmove", moveDraw, { passive: false });
+    window.addEventListener("touchend", endDraw);
+
+    clearBtn.addEventListener("click", () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      hasSign = false;
+      updateSubmitState();
+    });
+
+    submitBtn.addEventListener("click", () => {
+      localStorage.setItem("agreement_signed", "1");
+      go("./alipay-face.html");
+    });
+  </script>
+</body>
+</html>
