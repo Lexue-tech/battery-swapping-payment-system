@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>支付宝 - 先享后付代扣签约</title>
-  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="../assets/css/styles.css">
 </head>
 <body>
   <main class="mobile-page alipay">
@@ -25,7 +25,7 @@
     </section>
     <button class="btn btn-blue success-btn" id="toPwdBtn">确认签约并输入支付密码</button>
   </main>
-  <script src="./app.js"></script>
+  <script src="../assets/js/app.js"></script>
   <script>
     const d = new Date();
     updateAmountText("#timeText", `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")} ${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}`);

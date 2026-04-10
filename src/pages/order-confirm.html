@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>先享后付支付系统 - 订单确认</title>
-  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="../assets/css/styles.css">
 </head>
 <body>
   <main class="mobile-page">
@@ -41,7 +41,7 @@
       <button class="btn btn-blue" id="nextBtn">我已知晓业务，去签约</button>
     </div>
   </main>
-  <script src="./app.js"></script>
+  <script src="../assets/js/app.js"></script>
   <script>
     const order = readOrder();
     updateAmountText("#amountText", toFixedAmount(order.amount || 199));

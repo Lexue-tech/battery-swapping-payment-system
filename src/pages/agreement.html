@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>先享后付支付系统 - 协议签署</title>
-  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="../assets/css/styles.css">
 </head>
 <body>
   <main class="mobile-page">
@@ -24,7 +24,7 @@
       </div>
     </div>
   </main>
-  <script src="./app.js"></script>
+  <script src="../assets/js/app.js"></script>
   <script>
     const content = document.getElementById("agreementContent");
     const scrollTip = document.getElementById("scrollTip");
@@ -66,7 +66,7 @@
       return html;
     }
 
-    fetch("./docs/requirements/pages/铁塔换电套餐协议/协议.md")
+    fetch("../docs/requirements/pages/铁塔换电套餐协议/协议.md")
       .then((res) => res.text())
       .then((md) => {
         content.innerHTML = parseMarkdown(md);
