@@ -121,8 +121,40 @@
     function parseMarkdown(md) {
       const lines = md.split("\n");
       let html = "";
-      for (const raw of lines) {
+      let inTable = false;
+      for (let i = 0; i < lines.length; i++) {
+        const raw = lines[i];
         const line = raw.trim();
+
+        if (line.startsWith("|")) {
+          if (!inTable) {
+            inTable = true;
+            html += `<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:15px;text-align:center;">`;
+          }
+          if (line.includes("---")) continue;
+          
+          let rowContent = line;
+          if (rowContent.startsWith("|")) rowContent = rowContent.slice(1);
+          if (rowContent.endsWith("|")) rowContent = rowContent.slice(0, -1);
+          
+          const cells = rowContent.split("|");
+          const isHeader = i + 1 < lines.length && lines[i + 1].trim().startsWith("|") && lines[i + 1].trim().includes("---");
+          
+          html += `<tr>`;
+          for (const cell of cells) {
+            if (isHeader) {
+              html += `<th style="border:1px solid #e5e7eb;padding:10px 8px;background:#f9fafb;color:#111827;font-weight:600;">${cell.trim()}</th>`;
+            } else {
+              html += `<td style="border:1px solid #e5e7eb;padding:10px 8px;color:#374151;">${cell.trim()}</td>`;
+            }
+          }
+          html += `</tr>`;
+          continue;
+        } else if (inTable) {
+          inTable = false;
+          html += `</table>`;
+        }
+
         if (!line) {
           html += "<p style='height:8px;'></p>";
           continue;
@@ -139,11 +171,10 @@
           html += `<h3>${line.slice(4)}</h3>`;
           continue;
         }
-        if (line.startsWith("|")) {
-          html += `<pre style="white-space:pre-wrap;border:1px solid #e5e7eb;padding:8px;border-radius:8px;">${line}</pre>`;
-          continue;
-        }
         html += `<p style="font-size:17px;">${line}</p>`;
+      }
+      if (inTable) {
+        html += `</table>`;
       }
       return html;
     }
