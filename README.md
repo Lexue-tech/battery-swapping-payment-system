@@ -16,15 +16,20 @@
 ## 页面说明
 | 页面 | 文件 | 说明 |
 |------|------|------|
-| 铁塔收银台 | index.html | 套餐展示，购买入口 |
-| 订单确认-信息 | order-confirm.html | 订单详情确认 |
-| 订单确认-告知书 | disclosure.html | 告知书阅读确认 |
-| 人脸识别 | face-recognition.html | 模拟人脸认证 |
-| 支付宝签约 | alipay-sign.html | 模拟支付宝签约 |
-| 签约成功 | order-success.html | 签约结果展示 |
+| 导航菜单 | index.html | 页面导航与快捷入口 |
+| 铁塔收银台 | cashier.html | 套餐展示，购买入口 |
+| 订单确认-信息 | pages/order-confirm.html | 订单详情确认 |
+| 套餐协议 | pages/agreement.html | 协议阅读确认 |
+| 人脸识别 | pages/alipay-face.html | 模拟人脸认证 |
+| 支付宝签约 | pages/alipay-sign.html | 模拟支付宝签约 |
+| 支付密码 | pages/alipay-password.html | 确认支付 |
+| 签约成功 | pages/sign-success.html | 签约并支付完成 |
+| 铁塔订单页 | pages/tower-order-success.html | 最终结果展示 |
 
 ## 运行方式
-直接用浏览器打开 `index.html` 即可体验完整流程。
+直接用浏览器打开 `src/index.html` 即可查看导航菜单。
+
+如需从业务主流程开始体验，请打开 `src/cashier.html`。
 
 ## 技术栈
 - HTML5
