@@ -27,7 +27,7 @@
     updateAmountText("#amountText", `${toFixedAmount(order.amount || 199)}元`);
     const d = new Date();
     updateAmountText("#timeText", `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")} ${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}`);
-    document.getElementById("backCashier").addEventListener("click", () => go("../cashier.html?success=1"));
+    document.getElementById("backCashier").addEventListener("click", () => go("./cashier.html?success=1"));
   </script>
 </body>
 </html>

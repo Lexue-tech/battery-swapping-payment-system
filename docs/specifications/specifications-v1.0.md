@@ -225,7 +225,7 @@
 | 页面 | 文件名 | URL参数 |
 |------|--------|---------|
 | 导航菜单 | index.html | - |
-| 铁塔收银台 | cashier.html | - |
+| 铁塔收银台 | pages/cashier.html | - |
 | ISV订单确认-信息 | order-confirm.html | package, price |
 | ISV订单确认-告知书 | disclosure.html | - |
 | ISV订单确认-人脸识别 | face-recognition.html | - |

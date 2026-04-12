@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>铁塔换电APP - 收银台</title>
-  <link rel="stylesheet" href="./assets/css/styles.css">
+  <link rel="stylesheet" href="../assets/css/styles.css">
 </head>
 <body>
   <main class="mobile-page">
     <div class="topbar">
-      <button class="left">‹</button>
+      <button class="left" onclick="go('../index.html')">‹</button>
       购买套餐
     </div>
     <section class="section" style="background: linear-gradient(180deg,#d9fffb 0%,#f6fffe 100%);">
@@ -67,12 +67,12 @@
     <div class="bottom-action">
       <label class="agreement-check">
         <input type="checkbox" id="agreeCheck">
-        请阅读并同意铁塔换电 <a href="./pages/agreement.html?preview=1">《套餐协议》</a>
+        请阅读并同意铁塔换电 <a href="./agreement.html?preview=1">《套餐协议》</a>
       </label>
       <button class="btn btn-primary" id="payBtn" disabled>立即支付</button>
     </div>
   </main>
-  <script src="./assets/js/app.js"></script>
+  <script src="../assets/js/app.js"></script>
   <script>
     const query = new URLSearchParams(window.location.search);
     if (query.get("success") === "1") {
@@ -95,7 +95,7 @@
         installment: "36月",
         stageInfo: "第1期24.15元，第2-36期3.91元"
       });
-      go("./pages/order-confirm.html");
+      go("./order-confirm.html");
     });
   </script>
 </body>

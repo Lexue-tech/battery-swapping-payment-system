@@ -17,7 +17,7 @@
 | 页面 | 文件 | 说明 |
 |------|------|------|
 | 导航菜单 | index.html | 页面导航与快捷入口 |
-| 铁塔收银台 | cashier.html | 套餐展示，购买入口 |
+| 铁塔收银台 | pages/cashier.html | 套餐展示，购买入口 |
 | 订单确认-信息 | pages/order-confirm.html | 订单详情确认 |
 | 套餐协议 | pages/agreement.html | 协议阅读确认 |
 | 人脸识别 | pages/alipay-face.html | 模拟人脸认证 |
@@ -29,7 +29,7 @@
 ## 运行方式
 直接用浏览器打开 `src/index.html` 即可查看导航菜单。
 
-如需从业务主流程开始体验，请打开 `src/cashier.html`。
+如需从业务主流程开始体验，请打开 `src/pages/cashier.html`。
 
 ## 技术栈
 - HTML5
