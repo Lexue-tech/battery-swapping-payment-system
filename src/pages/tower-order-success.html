@@ -23,8 +23,12 @@
   <script src="../assets/js/app.js"></script>
   <script>
     const order = readOrder();
-    updateAmountText("#pkgText", order.packageName || "先享后付套餐");
-    updateAmountText("#amountText", `${toFixedAmount(order.amount || 199)}元`);
+    const amount = Number(order.amount || 756);
+    const packageText = "先享后付特价756元季卡";
+    const amountText = Number.isInteger(amount) ? `${amount}元` : `${toFixedAmount(amount)}元`;
+
+    updateAmountText("#pkgText", packageText);
+    updateAmountText("#amountText", amountText);
     const d = new Date();
     updateAmountText("#timeText", `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")} ${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}`);
     document.getElementById("backCashier").addEventListener("click", () => go("./cashier.html?success=1"));

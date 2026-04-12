@@ -8,14 +8,14 @@ function readOrder() {
   const value = localStorage.getItem(ORDER_KEY);
   if (!value) {
     return {
-      packageName: "先享后付特价199元30天",
-      amount: 199,
-      originalAmount: 300,
-      period: "30天",
+      packageName: "900元季卡",
+      amount: 756,
+      originalAmount: 900,
+      period: "90天",
       city: "石家庄市",
       orderNo: `2026${Date.now()}`.slice(0, 16),
-      installment: "36月",
-      stageInfo: "首期24.15元，剩余35期3.91元"
+      installment: "3个月",
+      stageInfo: "每期252元"
     };
   }
   try {

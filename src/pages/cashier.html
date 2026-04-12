@@ -36,27 +36,53 @@
       </div>
     </section>
     <section class="section" id="pkgList">
-      <div class="pkg featured">
+      <div
+        class="pkg is-active"
+        data-package-name="900元季卡"
+        data-amount="756"
+        data-original-amount="900"
+        data-period="90天"
+        data-installment="3个月"
+        data-stage-info="每期252元"
+      >
         <div class="battery-icon">🔋</div>
         <div>
-          <div class="pkg-title">先享后付特价199元30天</div>
-          <div class="pkg-price">¥199 <span class="old">¥300</span></div>
+          <div class="pkg-title">900元季卡</div>
+          <div class="pkg-price">¥756 <span class="old">¥900</span></div>
           <div class="pkg-tags">
             <span>不限次数</span>
             <span>租金可退</span>
             <span>套餐说明</span>
           </div>
         </div>
-        <span class="badge" id="signedTag" style="display:none;">已签约</span>
+        <div class="pkg-badges">
+          <span class="badge badge-promo">先享后付<br>直降144元</span>
+        </div>
       </div>
-      <div class="pkg card">
+      <div
+        class="pkg card"
+        data-package-name="石家庄60天换电套餐（超值推荐）"
+        data-amount="449"
+        data-original-amount="600"
+        data-period="60天"
+        data-installment="36月"
+        data-stage-info="第1期54.45元，第2-36期11.27元"
+      >
         <div class="battery-icon">🔋</div>
         <div>
           <div class="pkg-title">石家庄60天换电套餐（超值推荐）</div>
           <div class="pkg-price">¥449 <span class="old">¥600</span></div>
         </div>
       </div>
-      <div class="pkg card">
+      <div
+        class="pkg card"
+        data-package-name="石家庄30天换电套餐"
+        data-amount="229"
+        data-original-amount="300"
+        data-period="30天"
+        data-installment="36月"
+        data-stage-info="第1期27.80元，第2-36期5.73元"
+      >
         <div class="battery-icon">🔋</div>
         <div>
           <div class="pkg-title">石家庄30天换电套餐</div>
@@ -74,26 +100,47 @@
   </main>
   <script src="../assets/js/app.js"></script>
   <script>
-    const query = new URLSearchParams(window.location.search);
-    if (query.get("success") === "1") {
-      document.getElementById("signedTag").style.display = "inline-block";
-      showToast("签约并支付完成，欢迎使用先享后付");
+    const packageCards = Array.from(document.querySelectorAll("#pkgList .pkg"));
+    let selectedCard = packageCards[0];
+    const fixedOrderData = {
+      packageName: "900元季卡",
+      amount: 756,
+      originalAmount: 900,
+      period: "90天",
+      installment: "3个月",
+      stageInfo: "每期252元"
+    };
+
+    function selectPackage(card) {
+      selectedCard = card;
+      packageCards.forEach((item) => item.classList.toggle("is-active", item === card));
     }
 
-    document.getElementById("agreeCheck").addEventListener("change", (e) => {
-      document.getElementById("payBtn").disabled = !e.target.checked;
+    packageCards.forEach((card) => {
+      card.addEventListener("click", () => selectPackage(card));
     });
 
-    document.getElementById("payBtn").addEventListener("click", () => {
+    const agreeCheck = document.getElementById("agreeCheck");
+    const payBtn = document.getElementById("payBtn");
+
+    function syncPayButtonState() {
+      payBtn.disabled = !agreeCheck.checked;
+    }
+
+    agreeCheck.addEventListener("change", syncPayButtonState);
+    window.addEventListener("pageshow", syncPayButtonState);
+    syncPayButtonState();
+
+    payBtn.addEventListener("click", () => {
       saveOrder({
-        packageName: "先享后付特价199元30天",
-        amount: 199,
-        originalAmount: 300,
-        period: "30天",
+        packageName: fixedOrderData.packageName,
+        amount: fixedOrderData.amount,
+        originalAmount: fixedOrderData.originalAmount,
+        period: fixedOrderData.period,
         city: "石家庄市",
         orderNo: `2026${Date.now()}`.slice(0, 16),
-        installment: "36月",
-        stageInfo: "第1期24.15元，第2-36期3.91元"
+        installment: fixedOrderData.installment,
+        stageInfo: fixedOrderData.stageInfo
       });
       go("./order-confirm.html");
     });
