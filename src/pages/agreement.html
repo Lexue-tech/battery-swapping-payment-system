@@ -181,7 +181,7 @@
             html += `<h3>${line.slice(4)}</h3>`;
             continue;
           }
-          html += `<p style="font-size:17px;">${line}</p>`;
+          html += `<p>${line}</p>`;
         }
         if (inTable) {
           html += `</table>`;
@@ -196,6 +196,7 @@
         const rect = canvas.getBoundingClientRect();
         canvas.width = rect.width * window.devicePixelRatio;
         canvas.height = rect.height * window.devicePixelRatio;
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
         ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
         ctx.lineWidth = 2.5;
         ctx.lineCap = "round";

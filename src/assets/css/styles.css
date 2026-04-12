@@ -6,6 +6,8 @@
   --muted: #6b7280;
   --line: #e5e7eb;
   --blue: #1677ff;
+  --mobile-max-width: 430px;
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
 }
 
 * {
@@ -20,6 +22,7 @@ body {
     sans-serif;
   color: var(--text);
   background: var(--bg);
+  line-height: 1.5;
 }
 
 a {
@@ -27,11 +30,17 @@ a {
 }
 
 .mobile-page {
-  max-width: 430px;
+  max-width: var(--mobile-max-width);
   min-height: 100vh;
+  min-height: 100dvh;
   margin: 0 auto;
   background: #fff;
   position: relative;
+  overflow-x: hidden;
+}
+
+.mobile-page.has-bottom-action {
+  padding-bottom: calc(96px + var(--safe-bottom));
 }
 
 .menu-page {
@@ -235,6 +244,10 @@ a {
     transform 0.18s ease;
 }
 
+.pkg > div:nth-child(2) {
+  min-width: 0;
+}
+
 .pkg:hover {
   transform: translateY(-1px);
   box-shadow: 0 10px 24px rgba(21, 215, 200, 0.08);
@@ -280,9 +293,15 @@ a {
 .pkg-tags {
   display: flex;
   gap: 8px;
+  flex-wrap: wrap;
   margin-top: 6px;
   color: #28cbbd;
   font-size: 13px;
+}
+
+.pkg-tags span {
+  flex: none;
+  white-space: nowrap;
 }
 
 .badge {
@@ -313,26 +332,38 @@ a {
 .bottom-action {
   position: fixed;
   bottom: 0;
-  left: 0;
-  right: 0;
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   gap: 12px;
-  padding: 12px 16px;
+  width: min(100%, var(--mobile-max-width));
+  padding: 12px 16px calc(12px + var(--safe-bottom));
   background: #fff;
   border-top: 1px solid #f0f0f0;
+  box-shadow: 0 -8px 24px rgba(15, 23, 42, 0.08);
+  z-index: 20;
 }
 
 .agreement-check {
+  flex: 1 1 180px;
   font-size: 14px;
   color: #6b7280;
+  line-height: 1.5;
+  min-width: 0;
 }
 
 .agreement-check a {
   color: #17b8ab;
   text-decoration: none;
   font-weight: 600;
+}
+
+.bottom-action .btn {
+  flex: 0 0 164px;
 }
 
 .btn {
@@ -365,6 +396,17 @@ a {
   color: #fff;
 }
 
+.order-store {
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.order-address {
+  margin-top: 6px;
+  font-size: 20px;
+  opacity: 0.9;
+}
+
 .order-amount {
   padding: 16px;
   margin-top: 14px;
@@ -386,12 +428,20 @@ a {
 .row {
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
   padding: 8px 0;
   color: #374151;
 }
 
 .row .muted {
   color: #6b7280;
+}
+
+.row strong {
+  min-width: 0;
+  text-align: right;
+  word-break: break-word;
 }
 
 .agreement-wrap {
@@ -405,6 +455,11 @@ a {
   overflow: auto;
   padding: 16px;
   line-height: 1.7;
+}
+
+.agreement-content p {
+  margin: 0 0 12px;
+  font-size: 17px !important;
 }
 
 .agreement-content h1,
@@ -567,8 +622,63 @@ a {
   margin-bottom: 20px;
 }
 
+.sign-hero-icon {
+  font-size: 72px;
+  margin-top: 12px;
+}
+
+.sign-title {
+  margin: 10px 0 0;
+  font-size: 34px;
+  line-height: 1.22;
+}
+
+.sign-subtitle {
+  color: #9ca3af;
+  font-size: 24px;
+  margin-top: 8px;
+}
+
+.sign-details {
+  font-size: 19px;
+  line-height: 1.65;
+}
+
+.sign-details .row {
+  padding: 10px 0;
+}
+
+.sign-details .row .muted {
+  flex: 0 0 86px;
+  font-size: 15px;
+}
+
+.sign-details .row strong {
+  flex: 1;
+  font-size: 19px;
+  word-break: break-all;
+}
+
+.sign-detail-note {
+  margin-top: 14px;
+  color: #374151;
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+.tower-success-title {
+  font-size: 36px;
+  margin-top: 4px;
+}
+
+.tower-success-subtitle {
+  color: #6b7280;
+  font-size: 20px;
+}
+
 .payment-result-page {
   min-height: 100vh;
+  min-height: 100dvh;
   padding-bottom: 36px;
 }
 
@@ -631,6 +741,258 @@ a {
 
   .payment-result-value {
     font-size: 26px;
+  }
+}
+
+@media (max-width: 390px) {
+  .topbar {
+    font-size: 20px;
+  }
+
+  .section {
+    padding: 14px;
+  }
+
+  .order-amount strong {
+    font-size: 42px;
+  }
+
+  .payment-result-title {
+    font-size: 34px;
+  }
+
+  .payment-result-value {
+    font-size: 24px;
+  }
+
+  .tower-success-title {
+    font-size: 32px;
+  }
+}
+
+@media (max-width: 360px) {
+  .mobile-page.has-bottom-action {
+    padding-bottom: calc(118px + var(--safe-bottom));
+  }
+
+  .topbar {
+    height: 52px;
+    font-size: 18px;
+  }
+
+  .topbar .left {
+    left: 12px;
+    font-size: 22px;
+  }
+
+  .section {
+    padding: 12px;
+  }
+
+  .chip-row {
+    gap: 6px;
+  }
+
+  .chip {
+    padding: 7px 11px;
+    font-size: 12px;
+  }
+
+  .pkg {
+    grid-template-columns: 52px minmax(0, 1fr);
+    gap: 10px;
+    padding: 12px;
+  }
+
+  .battery-icon {
+    width: 52px;
+    height: 52px;
+    font-size: 26px;
+  }
+
+  .pkg-title {
+    font-size: 18px;
+    line-height: 1.35;
+  }
+
+  .pkg-price {
+    font-size: 28px;
+  }
+
+  .pkg-price .old {
+    font-size: 18px;
+  }
+
+  .pkg-badges {
+    grid-column: 2;
+    align-items: flex-start;
+    margin-top: 2px;
+  }
+
+  .badge-promo {
+    max-width: none;
+    padding: 6px 8px;
+    font-size: 11px;
+  }
+
+  .pkg-tags {
+    gap: 6px;
+    font-size: 12px;
+  }
+
+  .bottom-action {
+    gap: 10px;
+    padding: 10px 12px calc(10px + var(--safe-bottom));
+  }
+
+  .agreement-check {
+    flex-basis: 100%;
+    font-size: 13px;
+  }
+
+  .bottom-action .btn {
+    flex-basis: 100%;
+    width: 100%;
+  }
+
+  .order-head {
+    padding: 14px 12px 18px;
+  }
+
+  .order-store {
+    font-size: 24px;
+  }
+
+  .order-address {
+    font-size: 16px;
+  }
+
+  .order-amount {
+    margin-top: 12px;
+    padding: 14px 12px;
+  }
+
+  .order-amount strong {
+    font-size: 36px;
+  }
+
+  .detail-table {
+    padding: 14px;
+  }
+
+  .agreement-content {
+    padding: 14px;
+  }
+
+  .agreement-content h1 {
+    font-size: 26px;
+    line-height: 1.25;
+  }
+
+  .agreement-content h2 {
+    font-size: 20px;
+  }
+
+  .agreement-content p {
+    font-size: 16px !important;
+  }
+
+  .signature-box {
+    padding: 10px;
+  }
+
+  .signature-actions {
+    flex-direction: column;
+  }
+
+  .alipay-header {
+    height: 52px;
+    font-size: 18px;
+  }
+
+  .face-box {
+    padding: 18px 14px;
+  }
+
+  .face-circle {
+    width: 148px;
+    height: 148px;
+    font-size: 64px;
+  }
+
+  .pwd-title {
+    padding: 14px;
+    font-size: 24px;
+  }
+
+  .pwd-dots span {
+    height: 48px;
+  }
+
+  .key {
+    height: 68px;
+    font-size: 28px;
+  }
+
+  .success-icon {
+    width: 120px;
+    height: 120px;
+    margin-top: 26px;
+    font-size: 60px;
+  }
+
+  .sign-hero-icon {
+    font-size: 56px;
+  }
+
+  .sign-title {
+    font-size: 24px;
+  }
+
+  .sign-subtitle {
+    font-size: 18px;
+  }
+
+  .sign-details {
+    font-size: 16px;
+  }
+
+  .sign-details .row .muted {
+    flex-basis: 74px;
+    font-size: 14px;
+  }
+
+  .sign-details .row strong {
+    font-size: 16px;
+  }
+
+  .sign-detail-note {
+    font-size: 15px;
+  }
+
+  .payment-result-title {
+    font-size: 28px;
+  }
+
+  .payment-result-row {
+    grid-template-columns: 84px 1fr;
+  }
+
+  .payment-result-label {
+    font-size: 15px;
+  }
+
+  .payment-result-value {
+    font-size: 22px;
+  }
+
+  .tower-success-title {
+    font-size: 26px;
+    line-height: 1.25;
+  }
+
+  .tower-success-subtitle {
+    font-size: 18px;
   }
 }
 

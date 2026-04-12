@@ -7,21 +7,21 @@
   <link rel="stylesheet" href="../assets/css/styles.css">
 </head>
 <body>
-  <main class="mobile-page alipay">
+  <main class="mobile-page alipay alipay-sign-page">
     <div class="topbar">
       <button class="left" onclick="history.back()">‹</button>
       先享后付代扣签约
     </div>
-    <section class="section center">
-      <div style="font-size:86px;margin-top:16px;">💳</div>
-      <h1 style="margin:8px 0 0;font-size:44px;">先享后付代扣签约</h1>
-      <p style="color:#9ca3af;font-size:30px;margin-top:8px;">支付宝自动代扣</p>
+    <section class="section center sign-hero">
+      <div class="sign-hero-icon">💳</div>
+      <h1 class="sign-title">先享后付代扣签约</h1>
+      <p class="sign-subtitle">支付宝自动代扣</p>
     </section>
-    <section class="section" style="font-size:28px;line-height:1.7;">
+    <section class="section sign-details">
       <div class="row"><span class="muted">当前状态</span><strong style="color:#16a34a;">待签约</strong></div>
       <div class="row"><span class="muted">开通时间</span><strong id="timeText"></strong></div>
       <div class="row"><span class="muted">服务协议号</span><strong id="serviceNo"></strong></div>
-      <div style="margin-top:12px;color:#374151;">服务详情：您签约后，系统可在账单到期后发起自动扣款，无需手动逐期支付。</div>
+      <div class="sign-detail-note">服务详情：您签约后，系统可在账单到期后发起自动扣款，无需手动逐期支付。</div>
     </section>
     <button class="btn btn-blue success-btn" id="toPwdBtn">确认签约并输入支付密码</button>
   </main>
