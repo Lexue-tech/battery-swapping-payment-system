@@ -15,7 +15,9 @@
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", Arial,
+    sans-serif;
   color: var(--text);
   background: var(--bg);
 }
@@ -109,7 +111,10 @@ a {
   background: rgba(255, 255, 255, 0.9);
   box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
   text-decoration: none;
-  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    border-color 0.18s ease;
 }
 
 .menu-card:hover {
@@ -223,7 +228,11 @@ a {
   border-radius: 14px;
   margin-bottom: 12px;
   cursor: pointer;
-  transition: border-color 0.18s ease, background-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+  transition:
+    border-color 0.18s ease,
+    background-color 0.18s ease,
+    box-shadow 0.18s ease,
+    transform 0.18s ease;
 }
 
 .pkg:hover {
@@ -302,8 +311,10 @@ a {
 }
 
 .bottom-action {
-  position: sticky;
+  position: fixed;
   bottom: 0;
+  left: 0;
+  right: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;

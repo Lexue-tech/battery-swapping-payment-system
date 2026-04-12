@@ -1,263 +1,274 @@
 <!doctype html>
 <html lang="zh-CN">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>先享后付支付系统 - 协议签署</title>
-  <link rel="stylesheet" href="../assets/css/styles.css">
-</head>
-<body>
-  <main class="mobile-page">
-    <div class="topbar">
-      <button class="left" onclick="history.back()">‹</button>
-      用户签署
-    </div>
-    <div class="agreement-wrap">
-      <article class="agreement-content" id="agreementContent"></article>
-      <div class="signature-box">
-        <div class="signature-tip" id="scrollTip">请先阅读到协议底部，再进行手写电子签名</div>
-        <canvas class="signature-canvas" id="signatureCanvas"></canvas>
-        <div class="signature-actions">
-          <button class="btn btn-light" id="clearBtn">清除签名</button>
-          <button class="btn btn-blue" id="submitBtn" disabled>完成签名并去支付宝</button>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>先享后付支付系统 - 协议签署</title>
+    <link rel="stylesheet" href="../assets/css/styles.css" />
+  </head>
+  <body>
+    <main class="mobile-page">
+      <div class="topbar">
+        <button class="left" onclick="history.back()">‹</button>
+        用户签署
+      </div>
+      <div class="agreement-wrap">
+        <article class="agreement-content" id="agreementContent"></article>
+        <div class="signature-box">
+          <div class="signature-tip" id="scrollTip">
+            请先阅读到协议底部，再进行手写电子签名
+          </div>
+          <canvas class="signature-canvas" id="signatureCanvas"></canvas>
+          <div class="signature-actions">
+            <button class="btn btn-light" id="clearBtn">清除</button>
+            <button class="btn btn-blue" id="submitBtn" disabled>
+              完成签名并去支付宝
+            </button>
+          </div>
         </div>
       </div>
-    </div>
-  </main>
-  <script type="text/markdown" id="mdSource">
-# 铁塔换电套餐协议
+    </main>
+    <script type="text/markdown" id="mdSource">
+      # 铁塔换电套餐协议
 
-尊敬的用户，为保障您的合法权益，请在您购买套餐前仔细阅读本规则，以免造成误解，您需特别关注和充分理解黑体字的内容。当您点击“支付”按钮后，即视为您已经阅读、理解本规则，并同意按照本规则约定购买、使用铁塔换电服务。
+      尊敬的用户，为保障您的合法权益，请在您购买套餐前仔细阅读本规则，以免造成误解，您需特别关注和充分理解黑体字的内容。当您点击“支付”按钮后，即视为您已经阅读、理解本规则，并同意按照本规则约定购买、使用铁塔换电服务。
 
-本协议由您与铁塔能源有限公司河北分公司共同签署。本规则内容包含现在及将来我们通过网络及（或）其他通讯方式告知您的各项操作提示、规则、公告、说明等（以下统称“服务规则”）。
+      本协议由您与铁塔能源有限公司河北分公司共同签署。本规则内容包含现在及将来我们通过网络及（或）其他通讯方式告知您的各项操作提示、规则、公告、说明等（以下统称“服务规则”）。
 
-如果您在任何时候对任何内容存在疑虑或异议，请您立即联系我们（客服电话：10096），以便我们对相关内容进行解释和说明，使您能够充分理解，从而帮助您决定是否接受本服务规则及使用我们的服务。
+      如果您在任何时候对任何内容存在疑虑或异议，请您立即联系我们（客服电话：10096），以便我们对相关内容进行解释和说明，使您能够充分理解，从而帮助您决定是否接受本服务规则及使用我们的服务。
 
-## 一、套餐使用规则
+      ## 一、套餐使用规则
 
-1. 套餐可用在铁塔换电APP、微信和支付宝小程序进行换电业务；
-2. 套餐仅限当前账号使用，不允许转让或转赠他人，请您妥善保管好自己的账号；
-3. 套餐无法跨地市使用，请您审慎确认使用城市后再购买。如变更使用城市，则需结束本套餐再另行购买新套餐，由此可能造成的损失由您自行承担；
-4. 套餐生效：如您当前有在用套餐，套餐自当前在用套餐使用期届满后第二日生效；如您当前没有在用套餐，套餐自支付购买费用之日起生效。如购买多个套餐，则按照购买顺序依次生效。
-5. 套餐到期：套餐使用期届满即视为套餐到期。若您的套餐即将到期，请最晚于套餐使用期届满当日归还电池。套餐使用期详见具体套餐下的使用说明。套餐到期前3日，我们会通过铁塔换电APP、微信公众号推送提醒信息，提示您及时续费（购买任一套餐）或者按时归还电池。
+      1. 套餐可用在铁塔换电APP、微信和支付宝小程序进行换电业务；
+      2. 套餐仅限当前账号使用，不允许转让或转赠他人，请您妥善保管好自己的账号；
+      3. 套餐无法跨地市使用，请您审慎确认使用城市后再购买。如变更使用城市，则需结束本套餐再另行购买新套餐，由此可能造成的损失由您自行承担；
+      4. 套餐生效：如您当前有在用套餐，套餐自当前在用套餐使用期届满后第二日生效；如您当前没有在用套餐，套餐自支付购买费用之日起生效。如购买多个套餐，则按照购买顺序依次生效。
+      5. 套餐到期：套餐使用期届满即视为套餐到期。若您的套餐即将到期，请最晚于套餐使用期届满当日归还电池。套餐使用期详见具体套餐下的使用说明。套餐到期前3日，我们会通过铁塔换电APP、微信公众号推送提醒信息，提示您及时续费（购买任一套餐）或者按时归还电池。
 
-套餐到期后，换电系统自动对账户锁定，届时您将无法正常换电。对此，请及时关注、查询或咨询客服人员了解是否存在套餐到期的情况。
+      套餐到期后，换电系统自动对账户锁定，届时您将无法正常换电。对此，请及时关注、查询或咨询客服人员了解是否存在套餐到期的情况。
 
-## 二、套餐退款规则
+      ## 二、套餐退款规则
 
-### （一）在符合下述任一情形时，您可申请全额退款
+      ### （一）在符合下述任一情形时，您可申请全额退款
 
-1. 购买套餐后，未领取电池。
-2. 购买套餐后，虽已领取电池，但：
-   (1) 电池未使用，没有移动轨迹（公司后台可显示电池放电和移动记录），当天退还电池；
-   (2) 或经核实电池确实无法在车辆上使用；
+      1. 购买套餐后，未领取电池。
+      2. 购买套餐后，虽已领取电池，但：
+         (1) 电池未使用，没有移动轨迹（公司后台可显示电池放电和移动记录），当天退还电池；
+         (2) 或经核实电池确实无法在车辆上使用；
 
-### （二）在符合下述任一情形时，您可申请部分退款
+      ### （二）在符合下述任一情形时，您可申请部分退款
 
-#### 1. 不限次套餐
+      #### 1. 不限次套餐
 
-退款金额为套餐实际支付价格（不含代金券）扣减使用费，使用费按照每日15元计算。
+      退款金额为套餐实际支付价格（不含代金券）扣减使用费，使用费按照每日15元计算。
 
-例如，如果月租费实际支付289元，租期30天的套餐，使用2天的费用为2天×15元=30元，则退款金额为289-30=259元。
+      例如，如果月租费实际支付289元，租期30天的套餐，使用2天的费用为2天×15元=30元，则退款金额为289-30=259元。
 
-例如，如果用户购买的年卡、半年卡或季卡套餐，使用不满30天，按照上述月租进行扣减；使用超过30天的分次扣理。例如：季套餐实际支付849元，用户使用2个月零5天，要求退款，则退款金额为：849-2*(849/3)-15*5=208元。
+      例如，如果用户购买的年卡、半年卡或季卡套餐，使用不满30天，按照上述月租进行扣减；使用超过30天的分次扣理。例如：季套餐实际支付849元，用户使用2个月零5天，要求退款，则退款金额为：849-2*(849/3)-15*5=208元。
 
-#### 2. 次卡套餐
+      #### 2. 次卡套餐
 
-退款金额为套餐实际支付价格（不含代金券）扣减使用费，退款金额=套餐销售价格÷套餐总次数×剩余次数。
+      退款金额为套餐实际支付价格（不含代金券）扣减使用费，退款金额=套餐销售价格÷套餐总次数×剩余次数。
 
-例如，租费99元15次的套餐，换电3次，还剩12次，退款金额=99元÷15次×12=79.2元。
+      例如，租费99元15次的套餐，换电3次，还剩12次，退款金额=99元÷15次×12=79.2元。
 
-### （三）优惠活动的返还
+      ### （三）优惠活动的返还
 
-如果购买套餐时，我公司向您赠送了包括但不限于实物商品、虚拟商品或奖励（包括“老带新”奖励）等（下称“赠品”），当您要求退款时需要退回赠品，如赠品已使用或因其他原因无法退回的，我们将在合理测算赠品的成本，扣除相关赠品成本后再退款。
+      如果购买套餐时，我公司向您赠送了包括但不限于实物商品、虚拟商品或奖励（包括“老带新”奖励）等（下称“赠品”），当您要求退款时需要退回赠品，如赠品已使用或因其他原因无法退回的，我们将在合理测算赠品的成本，扣除相关赠品成本后再退款。
 
-### （四）特别提示
+      ### （四）特别提示
 
-1. 原则上参照以上标准进行退款，如有疑问，敬请联系客服咨询了解。
-2. 如存在以下任一情形，则无法退款：
-   (1) 未归还电池；
-   (2) 套餐到期后，申请退款的；
-   (3) 用户存在恶意毁坏铁塔换电资产等违约行为。
+      1. 原则上参照以上标准进行退款，如有疑问，敬请联系客服咨询了解。
+      2. 如存在以下任一情形，则无法退款：
+         (1) 未归还电池；
+         (2) 套餐到期后，申请退款的；
+         (3) 用户存在恶意毁坏铁塔换电资产等违约行为。
 
-## 三、特别说明
+      ## 三、特别说明
 
-您完全理解并同意，基于服务质量的提升，我们有权根据法律法规变化和运营需要，本着公平原则对本规则内容不时地进行修改。本规则一旦发生变动，届时我们将通过“铁塔换电服务号”微信公众号、“铁塔换电平台”微信小程序、铁塔换电APP等网络平台/软件、用户手机短信等发布修改后的规则，我们也可通过其它方式通知用户，修改后的规则一经通告即生效。如果您选择继续使用铁塔换电服务，表示您同意并接受修改后的规则并愿意受其约束。如果您不同意我们对本规则的修改，请立即停止使用本服务，并与我们的客服人员联系协商后续事宜。
+      您完全理解并同意，基于服务质量的提升，我们有权根据法律法规变化和运营需要，本着公平原则对本规则内容不时地进行修改。本规则一旦发生变动，届时我们将通过“铁塔换电服务号”微信公众号、“铁塔换电平台”微信小程序、铁塔换电APP等网络平台/软件、用户手机短信等发布修改后的规则，我们也可通过其它方式通知用户，修改后的规则一经通告即生效。如果您选择继续使用铁塔换电服务，表示您同意并接受修改后的规则并愿意受其约束。如果您不同意我们对本规则的修改，请立即停止使用本服务，并与我们的客服人员联系协商后续事宜。
 
-## 四、违约责任
+      ## 四、违约责任
 
-针对套餐到期后没有及时续交租金且继续占用电池的用户，本公司有权对相关用户收取逾期使用费，费用标准为10元/天。
+      针对套餐到期后没有及时续交租金且继续占用电池的用户，本公司有权对相关用户收取逾期使用费，费用标准为10元/天。
 
-由于用户原因造成电池丢失的，经我司确认后，要求用户按照电池赔偿标准，向我司支付电池赔偿金。电池赔偿标准如下：
+      由于用户原因造成电池丢失的，经我司确认后，要求用户按照电池赔偿标准，向我司支付电池赔偿金。电池赔偿标准如下：
 
-| 序号 | 电池型号 | 赔付金额 |
-|---|---|---|
-| 1 | 4820 | 1000 |
-| 2 | 4824 | 1400 |
-| 3 | 4825 | 1400 |
-| 4 | 4830 | 1500 |
-| 5 | 4840 | 2200 |
-| 6 | 6020 | 1200 |
-| 7 | 6025 | 1900 |
-| 8 | 6030 | 1900 |
-| 9 | 6040 | 2800 |
+      | 序号 | 电池型号 | 赔付金额 |
+      | ---- | -------- | -------- |
+      | 1    | 4820     | 1000     |
+      | 2    | 4824     | 1400     |
+      | 3    | 4825     | 1400     |
+      | 4    | 4830     | 1500     |
+      | 5    | 4840     | 2200     |
+      | 6    | 6020     | 1200     |
+      | 7    | 6025     | 1900     |
+      | 8    | 6030     | 1900     |
+      | 9    | 6040     | 2800     |
 
-## 五、管辖条款
+      ## 五、管辖条款
 
-本套餐协议履行过程中发生争议的，双方应向本公司所在地有管辖权的法院提起诉讼。
-  </script>
-  <script src="../assets/js/app.js"></script>
-  <script>
-    const content = document.getElementById("agreementContent");
-    const scrollTip = document.getElementById("scrollTip");
-    const submitBtn = document.getElementById("submitBtn");
-    const canvas = document.getElementById("signatureCanvas");
-    const clearBtn = document.getElementById("clearBtn");
-    const ctx = canvas.getContext("2d");
-    let reachedBottom = false;
-    let hasSign = false;
-    let drawing = false;
+      本套餐协议履行过程中发生争议的，双方应向本公司所在地有管辖权的法院提起诉讼。
+    </script>
+    <script src="../assets/js/app.js"></script>
+    <script>
+      const content = document.getElementById("agreementContent");
+      const scrollTip = document.getElementById("scrollTip");
+      const submitBtn = document.getElementById("submitBtn");
+      const canvas = document.getElementById("signatureCanvas");
+      const clearBtn = document.getElementById("clearBtn");
+      const ctx = canvas.getContext("2d");
+      let reachedBottom = false;
+      let hasSign = false;
+      let drawing = false;
 
-    function parseMarkdown(md) {
-      const lines = md.split("\n");
-      let html = "";
-      let inTable = false;
-      for (let i = 0; i < lines.length; i++) {
-        const raw = lines[i];
-        const line = raw.trim();
+      function parseMarkdown(md) {
+        const lines = md.split("\n");
+        let html = "";
+        let inTable = false;
+        for (let i = 0; i < lines.length; i++) {
+          const raw = lines[i];
+          const line = raw.trim();
 
-        if (line.startsWith("|")) {
-          if (!inTable) {
-            inTable = true;
-            html += `<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:15px;text-align:center;">`;
-          }
-          if (line.includes("---")) continue;
-          
-          let rowContent = line;
-          if (rowContent.startsWith("|")) rowContent = rowContent.slice(1);
-          if (rowContent.endsWith("|")) rowContent = rowContent.slice(0, -1);
-          
-          const cells = rowContent.split("|");
-          const isHeader = i + 1 < lines.length && lines[i + 1].trim().startsWith("|") && lines[i + 1].trim().includes("---");
-          
-          html += `<tr>`;
-          for (const cell of cells) {
-            if (isHeader) {
-              html += `<th style="border:1px solid #e5e7eb;padding:10px 8px;background:#f9fafb;color:#111827;font-weight:600;">${cell.trim()}</th>`;
-            } else {
-              html += `<td style="border:1px solid #e5e7eb;padding:10px 8px;color:#374151;">${cell.trim()}</td>`;
+          if (line.startsWith("|")) {
+            if (!inTable) {
+              inTable = true;
+              html += `<table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:15px;text-align:center;">`;
             }
+            if (line.includes("---")) continue;
+
+            let rowContent = line;
+            if (rowContent.startsWith("|")) rowContent = rowContent.slice(1);
+            if (rowContent.endsWith("|")) rowContent = rowContent.slice(0, -1);
+
+            const cells = rowContent.split("|");
+            const isHeader =
+              i + 1 < lines.length &&
+              lines[i + 1].trim().startsWith("|") &&
+              lines[i + 1].trim().includes("---");
+
+            html += `<tr>`;
+            for (const cell of cells) {
+              if (isHeader) {
+                html += `<th style="border:1px solid #e5e7eb;padding:10px 8px;background:#f9fafb;color:#111827;font-weight:600;">${cell.trim()}</th>`;
+              } else {
+                html += `<td style="border:1px solid #e5e7eb;padding:10px 8px;color:#374151;">${cell.trim()}</td>`;
+              }
+            }
+            html += `</tr>`;
+            continue;
+          } else if (inTable) {
+            inTable = false;
+            html += `</table>`;
           }
-          html += `</tr>`;
-          continue;
-        } else if (inTable) {
-          inTable = false;
+
+          if (!line) {
+            html += "<p style='height:8px;'></p>";
+            continue;
+          }
+          if (line.startsWith("# ")) {
+            html += `<h1>${line.slice(2)}</h1>`;
+            continue;
+          }
+          if (line.startsWith("## ")) {
+            html += `<h2>${line.slice(3)}</h2>`;
+            continue;
+          }
+          if (line.startsWith("### ")) {
+            html += `<h3>${line.slice(4)}</h3>`;
+            continue;
+          }
+          html += `<p style="font-size:17px;">${line}</p>`;
+        }
+        if (inTable) {
           html += `</table>`;
         }
-
-        if (!line) {
-          html += "<p style='height:8px;'></p>";
-          continue;
-        }
-        if (line.startsWith("# ")) {
-          html += `<h1>${line.slice(2)}</h1>`;
-          continue;
-        }
-        if (line.startsWith("## ")) {
-          html += `<h2>${line.slice(3)}</h2>`;
-          continue;
-        }
-        if (line.startsWith("### ")) {
-          html += `<h3>${line.slice(4)}</h3>`;
-          continue;
-        }
-        html += `<p style="font-size:17px;">${line}</p>`;
+        return html;
       }
-      if (inTable) {
-        html += `</table>`;
+
+      const mdContent = document.getElementById("mdSource").textContent.trim();
+      content.innerHTML = parseMarkdown(mdContent);
+
+      function resizeCanvas() {
+        const rect = canvas.getBoundingClientRect();
+        canvas.width = rect.width * window.devicePixelRatio;
+        canvas.height = rect.height * window.devicePixelRatio;
+        ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+        ctx.lineWidth = 2.5;
+        ctx.lineCap = "round";
+        ctx.strokeStyle = "#111827";
       }
-      return html;
-    }
 
-    const mdContent = document.getElementById("mdSource").textContent.trim();
-    content.innerHTML = parseMarkdown(mdContent);
+      resizeCanvas();
+      window.addEventListener("resize", resizeCanvas);
 
-    function resizeCanvas() {
-      const rect = canvas.getBoundingClientRect();
-      canvas.width = rect.width * window.devicePixelRatio;
-      canvas.height = rect.height * window.devicePixelRatio;
-      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
-      ctx.lineWidth = 2.5;
-      ctx.lineCap = "round";
-      ctx.strokeStyle = "#111827";
-    }
+      function updateSubmitState() {
+        submitBtn.disabled = !(reachedBottom && hasSign);
+      }
 
-    resizeCanvas();
-    window.addEventListener("resize", resizeCanvas);
+      content.addEventListener("scroll", () => {
+        const distance =
+          content.scrollHeight - content.scrollTop - content.clientHeight;
+        if (distance < 8) {
+          reachedBottom = true;
+          scrollTip.textContent = "已阅读到底部，请在下方手写电子签名";
+          updateSubmitState();
+        }
+      });
 
-    function updateSubmitState() {
-      submitBtn.disabled = !(reachedBottom && hasSign);
-    }
+      function getPoint(e) {
+        const rect = canvas.getBoundingClientRect();
+        const touch = e.touches ? e.touches[0] : e;
+        return {
+          x: touch.clientX - rect.left,
+          y: touch.clientY - rect.top,
+        };
+      }
 
-    content.addEventListener("scroll", () => {
-      const distance = content.scrollHeight - content.scrollTop - content.clientHeight;
-      if (distance < 8) {
-        reachedBottom = true;
-        scrollTip.textContent = "已阅读到底部，请在下方手写电子签名";
+      function startDraw(e) {
+        drawing = true;
+        const p = getPoint(e);
+        ctx.beginPath();
+        ctx.moveTo(p.x, p.y);
+        e.preventDefault();
+      }
+
+      function moveDraw(e) {
+        if (!drawing) {
+          return;
+        }
+        const p = getPoint(e);
+        ctx.lineTo(p.x, p.y);
+        ctx.stroke();
+        hasSign = true;
         updateSubmitState();
+        e.preventDefault();
       }
-    });
 
-    function getPoint(e) {
-      const rect = canvas.getBoundingClientRect();
-      const touch = e.touches ? e.touches[0] : e;
-      return {
-        x: touch.clientX - rect.left,
-        y: touch.clientY - rect.top
-      };
-    }
-
-    function startDraw(e) {
-      drawing = true;
-      const p = getPoint(e);
-      ctx.beginPath();
-      ctx.moveTo(p.x, p.y);
-      e.preventDefault();
-    }
-
-    function moveDraw(e) {
-      if (!drawing) {
-        return;
+      function endDraw() {
+        drawing = false;
       }
-      const p = getPoint(e);
-      ctx.lineTo(p.x, p.y);
-      ctx.stroke();
-      hasSign = true;
-      updateSubmitState();
-      e.preventDefault();
-    }
 
-    function endDraw() {
-      drawing = false;
-    }
+      canvas.addEventListener("mousedown", startDraw);
+      canvas.addEventListener("mousemove", moveDraw);
+      window.addEventListener("mouseup", endDraw);
+      canvas.addEventListener("touchstart", startDraw, { passive: false });
+      canvas.addEventListener("touchmove", moveDraw, { passive: false });
+      window.addEventListener("touchend", endDraw);
 
-    canvas.addEventListener("mousedown", startDraw);
-    canvas.addEventListener("mousemove", moveDraw);
-    window.addEventListener("mouseup", endDraw);
-    canvas.addEventListener("touchstart", startDraw, { passive: false });
-    canvas.addEventListener("touchmove", moveDraw, { passive: false });
-    window.addEventListener("touchend", endDraw);
+      clearBtn.addEventListener("click", () => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        hasSign = false;
+        updateSubmitState();
+      });
 
-    clearBtn.addEventListener("click", () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      hasSign = false;
-      updateSubmitState();
-    });
-
-    submitBtn.addEventListener("click", () => {
-      localStorage.setItem("agreement_signed", "1");
-      go("./alipay-face.html");
-    });
-  </script>
-</body>
+      submitBtn.addEventListener("click", () => {
+        localStorage.setItem("agreement_signed", "1");
+        go("./alipay-face.html");
+      });
+    </script>
+  </body>
 </html>
