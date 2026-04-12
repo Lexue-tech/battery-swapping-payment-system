@@ -3,13 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="支付宝先享后付代扣签约演示页，展示签约状态、协议号与支付密码入口。">
   <title>支付宝 - 先享后付代扣签约</title>
   <link rel="stylesheet" href="../assets/css/styles.css">
 </head>
 <body>
   <main class="mobile-page alipay alipay-sign-page">
     <div class="topbar">
-      <button class="left" onclick="history.back()">‹</button>
+      <button class="left" type="button" aria-label="返回上一页" onclick="history.back()">‹</button>
       先享后付代扣签约
     </div>
     <section class="section center sign-hero">
@@ -23,7 +24,7 @@
       <div class="row"><span class="muted">服务协议号</span><strong id="serviceNo"></strong></div>
       <div class="sign-detail-note">服务详情：您签约后，系统可在账单到期后发起自动扣款，无需手动逐期支付。</div>
     </section>
-    <button class="btn btn-blue success-btn" id="toPwdBtn">确认签约并输入支付密码</button>
+    <button class="btn btn-blue success-btn" type="button" id="toPwdBtn">确认签约并输入支付密码</button>
   </main>
   <script src="../assets/js/app.js"></script>
   <script>

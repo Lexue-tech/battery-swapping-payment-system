@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="支付宝身份验证演示页，模拟实名认证、人脸采集和活体识别流程。">
   <title>支付宝 - 身份验证</title>
   <link rel="stylesheet" href="../assets/css/styles.css">
 </head>
@@ -14,13 +15,13 @@
       <h2>测试商户</h2>
       <p style="line-height:1.7;color:#4b5563;">根据测试商户的签约管理要求，使用服务前您需要通过实名认证，并授权查询如下信息：</p>
       <p style="line-height:1.8;color:#4b5563;">· 你的本人脸认证结果<br>· 本次认证过程中拍摄的人脸照片</p>
-      <button class="btn btn-blue" id="agreeAuth" style="margin-top:18px;">同意协议并认证</button>
+      <button class="btn btn-blue" type="button" id="agreeAuth" style="margin-top:18px;">同意协议并认证</button>
     </section>
 
     <section class="face-box" id="step2" style="display:none;">
       <h2>拍摄本人脸，请确保正对手机，光线充足</h2>
       <div class="face-circle">🙂</div>
-      <button class="btn btn-blue" id="captureBtn">采集本人脸</button>
+      <button class="btn btn-blue" type="button" id="captureBtn">采集本人脸</button>
     </section>
 
     <section class="face-box" id="step3" style="display:none;">

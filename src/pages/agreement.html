@@ -6,13 +6,17 @@
       name="viewport"
       content="width=device-width, initial-scale=1, viewport-fit=cover"
     />
+    <meta
+      name="description"
+      content="铁塔换电套餐协议签署演示页，支持阅读协议、手写签名并继续完成支付宝签约流程。"
+    />
     <title>先享后付支付系统 - 协议签署</title>
     <link rel="stylesheet" href="../assets/css/styles.css" />
   </head>
   <body>
     <main class="mobile-page">
       <div class="topbar">
-        <button class="left" onclick="history.back()">‹</button>
+        <button class="left" type="button" aria-label="返回上一页" onclick="history.back()">‹</button>
         用户签署
       </div>
       <div class="agreement-wrap">
@@ -23,8 +27,8 @@
           </div>
           <canvas class="signature-canvas" id="signatureCanvas"></canvas>
           <div class="signature-actions">
-            <button class="btn btn-light" id="clearBtn">清除</button>
-            <button class="btn btn-blue" id="submitBtn" disabled>
+            <button class="btn btn-light" type="button" id="clearBtn">清除</button>
+            <button class="btn btn-blue" type="button" id="submitBtn" disabled>
               完成签名并去支付宝
             </button>
           </div>

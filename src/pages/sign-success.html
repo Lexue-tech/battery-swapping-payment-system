@@ -3,13 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="先享后付签约并支付成功演示页，展示订单信息、金额与返回商户动作。">
   <title>先享后付支付系统 - 签约并支付完成</title>
   <link rel="stylesheet" href="../assets/css/styles.css">
 </head>
 <body>
   <main class="mobile-page payment-result-page">
     <div class="topbar">
-      <button class="left" id="closeResult">×</button>
+      <button class="left" type="button" aria-label="关闭并返回商户" id="closeResult">×</button>
       银行卡付款
     </div>
 
@@ -27,7 +28,7 @@
       </div>
     </section>
 
-    <button class="btn btn-blue success-btn" id="backMerchant">返回商户</button>
+    <button class="btn btn-blue success-btn" type="button" id="backMerchant">返回商户</button>
     <div class="success-note"><span id="autoSec">4</span>s后自动返回</div>
   </main>
   <script src="../assets/js/app.js"></script>

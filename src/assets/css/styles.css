@@ -98,7 +98,7 @@ a {
 }
 
 .menu-section-head span {
-  color: var(--muted);
+  color: #4b5563;
   font-size: 14px;
 }
 
@@ -146,7 +146,7 @@ a {
 
 .menu-card span {
   flex: none;
-  color: #0f766e;
+  color: #0b5f58;
   font-weight: 700;
   font-size: 14px;
 }
@@ -448,6 +448,7 @@ a {
   display: flex;
   flex-direction: column;
   height: calc(100vh - 56px);
+  height: calc(100dvh - 56px);
 }
 
 .agreement-content {
