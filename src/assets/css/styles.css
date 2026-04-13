@@ -390,6 +390,12 @@ a {
   color: #fff;
 }
 
+.order-confirm-page .bottom-action .btn {
+  white-space: nowrap;
+  font-size: 16px;
+  padding: 0 14px;
+}
+
 .order-head {
   background: linear-gradient(180deg, #2d7cff 0%, #1b67f2 100%);
   padding: 16px;
@@ -493,6 +499,16 @@ a {
   margin-top: 8px;
   display: flex;
   gap: 8px;
+}
+
+.signature-actions .btn-light {
+  flex: 0 0 88px;
+}
+
+.signature-actions .btn-blue {
+  width: auto;
+  flex: 1 1 auto;
+  min-width: 0;
 }
 
 .btn-light {
@@ -903,7 +919,7 @@ a {
   }
 
   .signature-actions {
-    flex-direction: column;
+    flex-direction: row;
   }
 
   .alipay-header {
