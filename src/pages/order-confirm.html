@@ -47,6 +47,10 @@
             ><strong id="productAmountText"></strong>
           </div>
           <div class="row">
+            <span class="muted">平台服务费</span
+            ><strong id="serviceFeeText"></strong>
+          </div>
+          <div class="row">
             <span class="muted">支付方式</span><strong>支付宝先享</strong>
           </div>
           <div class="row">
@@ -86,7 +90,11 @@
       updateAmountText("#orderNo", order.orderNo || "");
       updateAmountText(
         "#productAmountText",
-        `${toFixedAmount(order.amount || 756)}元`,
+        `${toFixedAmount(order.productAmount || 730)}元`,
+      );
+      updateAmountText(
+        "#serviceFeeText",
+        `${toFixedAmount(order.serviceFee || 26)}元`,
       );
       updateAmountText("#installment", order.installment || "3个月");
       updateAmountText("#stageInfo", order.stageInfo || "每期252元");
