@@ -1,0 +1,156 @@
+# 支付宝开放平台应用网关使用测试环境的完整 HTTPS 地址。
+@mybankCallbackUrl = https://openapidev.lexue.com.cn/callbacks/v1/mybank/factoring
+# 本地启动的 Demo 提供以下调试 API。
+@demoApiBase = http://127.0.0.1:8080
+
+# 下方保理接口会直接向配置的保理网关发送 HTTP 请求，请先填写联调参数和密钥。
+
+### health（本地应用健康检查，不调用网商接口）
+GET {{demoApiBase}}/actuator/health
+Accept: application/json
+
+### factoring-supplier-create（身份从配置读取，门店业务资料从请求传入）
+# 买方身份、门店登录账号、账户户名和主体名称由 application.yml 填充，无需在请求中重复传入。
+# buyer_ip_id、buyer_ip_role_id、buyer_site_user_id 分别取 isv-ip-id、isv-ip-role-id、isv-alipay-user-id，均为 ISV 信息。
+# sellerContactName、sellerContactPhone、rcvAccountType 必填；收款类型只允许 ALIPAY 或 OUT_BANK，不设置默认值。
+# operatorName 有值时，门店编号/名称、主体证件号和省市区必填；主体名称由配置填充。
+# 银行卡收款时传 rcvAccountType=OUT_BANK，并补充 sellerBankName、sellerBankAcc；企业支付宝还需 sellerBankBranchUnionCode。
+# ALIPAY 时不向渠道发送银行卡资料。
+# 当前配置为企业支付宝门店，OUT_BANK 会校验银行名称、卡号和联行号均非空。
+POST {{demoApiBase}}/api/demo/mybank/factoring/supplier-create
+Content-Type: application/json
+
+< ./requests/factoring-supplier-create.json
+
+### factoring-seller-admit-query（门店准入查询，交易创建前调用）
+# 请求体为 {}；buyer_alipay_id、seller_login_id、pd_code 分别复用 isv-alipay-user-id、factoring-seller-login-id、factoring-sale-pd-code。
+# list_type 固定 NOT_ADMIT，按门店支付宝登录账号查询。
+# 查询同步返回：code=10000 仅表示查询成功，门店准入以 white=true 为准；exsit=true 仅表示已提交加白申请。
+POST {{demoApiBase}}/api/demo/mybank/factoring/seller-admit-query
+Content-Type: application/json
+
+< ./requests/factoring-seller-admit-query.json
+
+### factoring-create
+# sale_pd_code、channel 分别取配置 factoring-sale-pd-code、factoring-channel，HTTP 请求体无需传入。
+# alipayOrderNo 传原始行业先享订单号或线下模拟值，不要自行添加 skip，不再传 signOrderNo 或 extData.authNo。
+# 本次线下后端固定添加 skip：auth_no="skip"+alipayOrderNo，out_order_no=ISVIpRoleId+"_skip"+alipayOrderNo。
+# 后端设置 category=06、sense=HANGYE_XIANXIANG；不再传 ws_service_url 和 x-webgw-sofa-group-name。
+# request_user_id 按当前同账号约定复用配置 isv-alipay-user-id；branch_no 从 extData.branchNo 传入。
+# extData 中门店名称、联系人、省市区复用进件请求资料，经纬度也由请求提供；Demo 不保存上次进件内容。
+# 上述门店字段及 extData.branchNo 均必填；branchNo 最长32位，联系人手机号须为11位数字。
+# pay_account 固定 ALIPAY，账号和户名分别复用配置中的 isv-alipay-user-id、isv-company-name。
+# rcv_login_id 先按文档请求示例传递，后端复用 factoring-seller-login-id，与 seller.site_login_id 同值，无需单独传入。
+# extData.cBizOrderNo 取 t_application_order.application_no；后端同值填充 outMerchOrderNo、pageOrderNo，创建请求无需重复传入。
+# 6个月分期套餐：总本金1460元＋总利息52元＝tradeAmount 1512.00元，不扣除已付首期；后端直接复用该值设置 freeze_amount，无需传 extData.freezeAmount。
+# 每期252元；前五期本金243.33元＋利息8.67元，末期本金243.35元＋利息8.65元，保证本金、利息合计准确。
+# freezeTerms 取套餐总期数，包含已支付的首期；共6期仍传6。
+# freezeDate 取 t_credit_agreement.signed_at（渠道实际 sign_time），按上海时间 yyyy-MM-dd HH:mm:ss 填写；示例为2026-10-16 13:00:00。
+# 骑手账单每期30天、期初缴费：首期2026-10-16，末期应缴日期2027-03-15；六期明细见 README。
+# expireDate 无需传入：后端取上海时间请求当月，加 freezeTerms 个月，再取 factoring-repayment-day 配置的还款日零点。
+# 当前配置28号；2026年10月发起6期交易生成2027-04-28 00:00:00，正式还款日由网商配置后告知。
+# freezeAlipayId 是该订单实际签约用户的2088 UID；金额、签约时间、期数应与该订单对应。
+POST {{demoApiBase}}/api/demo/mybank/factoring/create
+Content-Type: application/json
+
+< ./requests/factoring-create.json
+
+### factoring-cancel
+# 产品码、渠道码与创建接口共用 factoring-sale-pd-code、factoring-channel 配置。
+# 只传本次线下交易创建时的原始 alipayOrderNo，不要自行添加 skip；后端拼接 ISVIpRoleId+"_skip"+alipayOrderNo，无需传 outOrderNo。
+POST {{demoApiBase}}/api/demo/mybank/factoring/cancel
+Content-Type: application/json
+
+< ./requests/factoring-cancel.json
+
+### factoring-netting-refund（整笔账款全额退款）
+# alipayOrderNo 传原交易创建时的原始值，不要添加 skip；后端按创建规则生成相同的 out_order_no。
+# request_id、out_refund_no 均由后端按 ISVIpRoleId_yyyyMMddHHmmss_8位随机数字生成，不从 HTTP 接收。
+# 网商已确认轧差退款只支持全款；refundAmount 单位元，本次传原账款总金额1512.00，不扣除首期252.00。
+# 买方身份、产品码、渠道码从配置读取，trade_type 固定 FACTORING。
+# 同步 evSeqNo 仅表示受理，最终结果看 nettingRefundEvent；settleResultEvent 为独立的配套清算通知。
+# 每次点击会生成新请求号和退款单号；已受理或超时结果未知时不要重复发起，请等待通知或联系网商核实。
+POST {{demoApiBase}}/api/demo/mybank/factoring/netting-refund
+Content-Type: application/json
+
+< ./requests/factoring-netting-refund.json
+
+### factoring-early-settle（先查还款预算，再发起整笔提前结清）
+# 调用此接口会在预算允许时直接发起还款，不是单纯查询；使用已放款、未结清且未轧差退款的订单。
+# alipayOrderNo 传创建时原始值，不添加 skip；示例已与创建请求使用同一订单，实际调用前确认该单可用于提前结清。
+# 先调用 billrepaybudget.query，can_repay=true 才调用 trade.pay。
+# can_repay=false 或缺失时抛出“当前不可提前还款”，不调用支付；HTTP 返回500及 {"message":"接口调用异常"}，具体原因查看服务端日志。
+# pay_amount 取本次预算 total_amt（元），不从 HTTP 接收，也不自行减去首期或 exempt_amt。
+# buyer、产品码、渠道从配置读取；request_id 由后端生成。
+# pre_payment_account 当前场景必传，类型固定 CURRENT_SHARE，账号和户名取 factoring-pre-payment-account-no/name 配置；当前子户为 99038100000000000811，户名为召缚丝的公司。
+# ext_data 固定为 {"payableRepayType":"preRepay","not_need_decide_other_pay_account":"Y"}，由后端转成 JSON 字符串发送。
+# 网商已确认铁塔换电必须传该标记且值为 Y；账户及标记均不从 HTTP 接收，此处仍只传 alipayOrderNo。
+# 查询成功且支付受理后，一并返回预算字段和 evSeqNo；支付结果看 tradePayEvent，账款最终结清看 settlePayablesEvent。
+# 每次点击会生成新支付请求号；受理后或超时结果未知时不要再次点击，等待通知或联系网商核实。
+POST {{demoApiBase}}/api/demo/mybank/factoring/early-settle
+Content-Type: application/json
+
+< ./requests/factoring-early-settle.json
+
+### factoring-afterloan
+# storeName、storeNo 从本次请求传入，与进件资料一致；ISV UID、门店登录账号仍从配置读取。
+# 网商已确认每期还款调用；首期已付快照在履约初始化事务提交后上传，不等待 loanResultEvent，后续每期还款后上传对应期次的快照。
+# activateState=ACTIVATED 由后端设置。
+# alipayOrderNo 传原交易创建时的原始值，不添加 skip；无需传 outOrderNo，后端按创建规则生成相同的 out_order_no。
+# 当前 Demo 要求 extData 必填，period 由调用方提供（1～50）；以下为首期已付的快照建议。
+# 总本金1460元、总利息52元、6期，首期本金243.33元＋利息8.67元已支付，剩余本金1216.67元。
+# totalAmount 单位元；capital、interest、orderBal 单位分。
+# 网商已确认 repayType：0 正常还款、1 提前还款、2 退货；repayStatus：0 还款成功、1 还款中、2 还款失败。
+# 当前示例 repayType="0"、repayStatus="0"，表示首期正常还款成功。
+# preauthFreezeTime、totalAmount、term 按项目约定分别复用创建的 freezeDate、tradeAmount、freezeTerms；本次 term 传"6"，包含首期。
+# pageOrderNo 仍由调用方传入 t_application_order.application_no，与创建时的 extData.cBizOrderNo 一致；C端/ISV还款口径仍按联调确认结果取值。
+# dataTime、activateTime 使用实际业务快照/激活时间；dueDate、payDate 使用 yyyyMMdd。
+POST {{demoApiBase}}/api/demo/mybank/factoring/afterloan
+Content-Type: application/json
+
+< ./requests/factoring-afterloan.json
+
+# 以下为待签名回调模板，sign 是占位值，直接发送会验签失败。
+# 测试环境使用网商 Demo 对端公钥验签。以下占位模板可验证拒绝无效通知；真实成功回执由网商发送。
+
+### tradeCreateEvent
+POST {{mybankCallbackUrl}}
+Content-Type: application/x-www-form-urlencoded; charset=UTF-8
+
+< ./callbacks/tradeCreateEvent.form
+
+### loanResultEvent
+POST {{mybankCallbackUrl}}
+Content-Type: application/x-www-form-urlencoded; charset=UTF-8
+
+< ./callbacks/loanResultEvent.form
+
+### tradeCancelEvent
+POST {{mybankCallbackUrl}}
+Content-Type: application/x-www-form-urlencoded; charset=UTF-8
+
+< ./callbacks/tradeCancelEvent.form
+
+### tradePayEvent（提前还款支付结果）
+POST {{mybankCallbackUrl}}
+Content-Type: application/x-www-form-urlencoded; charset=UTF-8
+
+< ./callbacks/tradePayEvent.form
+
+### settlePayablesEvent（账款结清结果，无 success 字段，机构字段为 dateOrgId）
+POST {{mybankCallbackUrl}}
+Content-Type: application/x-www-form-urlencoded; charset=UTF-8
+
+< ./callbacks/settlePayablesEvent.form
+
+### nettingRefundEvent（轧差退款结果）
+POST {{mybankCallbackUrl}}
+Content-Type: application/x-www-form-urlencoded; charset=UTF-8
+
+< ./callbacks/nettingRefundEvent.form
+
+### settleResultEvent（轧差趸付清算结果）
+POST {{mybankCallbackUrl}}
+Content-Type: application/x-www-form-urlencoded; charset=UTF-8
+
+< ./callbacks/settleResultEvent.form
