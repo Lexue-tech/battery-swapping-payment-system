@@ -133,6 +133,7 @@
     syncPayButtonState();
 
     payBtn.addEventListener("click", () => {
+      sessionStorage.setItem("mini_payment_kind", "order");
       saveOrder({
         packageName: fixedOrderData.packageName,
         amount: fixedOrderData.amount,
