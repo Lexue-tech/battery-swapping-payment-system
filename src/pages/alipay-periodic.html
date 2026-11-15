@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>开通免密支付</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #fff; color: #111; font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", Arial, sans-serif; }
+    .page { width: 100%; max-width: 430px; min-height: 100vh; margin: auto; background: #fff; }
+    .topbar { position: relative; display: flex; align-items: center; justify-content: center; height: 44px; border-bottom: 1px solid #e4e4e4; color: #172333; font-size: 16px; font-weight: 600; }
+    .back { position: absolute; left: 17px; display: grid; place-items: center; width: 28px; height: 40px; padding: 0; border: 0; background: none; color: #777; font-size: 29px; font-weight: 300; cursor: pointer; }
+    .hero { height: 165px; padding-top: 27px; text-align: center; }
+    .hero h1 { margin: 0 0 12px; font-size: 16px; font-weight: 600; }
+    .amount { font-size: 48px; line-height: 1.1; font-weight: 700; letter-spacing: -1px; }
+    .amount span { font-size: 32px; margin-right: 3px; }
+    .content { padding: 0 18px; }
+    .toggle-row { display: flex; align-items: center; justify-content: space-between; min-height: 50px; border-top: 1px solid #ededed; border-bottom: 1px solid #ededed; font-size: 15px; }
+    .switch { position: relative; flex: 0 0 30px; width: 30px; height: 18px; padding: 0; border: 0; border-radius: 20px; background: #315cdf; cursor: pointer; }
+    .switch::after { content: ""; position: absolute; top: 2px; right: 2px; width: 14px; height: 14px; border-radius: 50%; background: #fff; box-shadow: 0 1px 2px #0003; }
+    .switch[aria-checked="false"] { background: #ccc; }
+    .switch[aria-checked="false"]::after { right: 14px; }
+    .details { padding: 20px 0 13px; }
+    .detail { display: grid; grid-template-columns: 98px minmax(0, 1fr); column-gap: 0; margin-bottom: 25px; font-size: 15px; line-height: 1.55; }
+    .detail:last-child { margin-bottom: 13px; }
+    .label { color: #b5b5b5; }
+    .method { display: flex; justify-content: space-between; align-items: center; min-height: 50px; border-top: 1px solid #ededed; border-bottom: 1px solid #ededed; font-size: 15px; }
+    .method-value { display: flex; align-items: center; gap: 8px; }
+    .chevron { color: #999; font-size: 25px; font-weight: 300; line-height: 1; }
+    .consent { margin: 39px 0 12px; color: #aaa; font-size: 14px; }
+    .consent span { color: #1682ff; }
+    .pay { display: block; width: 100%; height: 51px; border: 0; border-radius: 8px; background: #1677ff; color: #fff; font-size: 17px; font-weight: 600; cursor: pointer; }
+    .pay:disabled { background: #a8c9f5; cursor: not-allowed; }
+    @media (max-width: 350px) { .detail { grid-template-columns: 90px minmax(0,1fr); font-size: 14px; } .content { padding: 0 15px; } }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="topbar"><button class="back" type="button" aria-label="返回" onclick="history.back()">‹</button>开通免密支付</header>
+    <section class="hero"><h1>铁塔换电分期</h1><div class="amount"><span>¥</span>252.00</div></section>
+    <div class="content">
+      <div class="toggle-row"><span>开通换电分期自动续费</span><button class="switch" type="button" role="switch" aria-label="开通换电分期自动续费" aria-checked="true"></button></div>
+      <section class="details" aria-label="服务详情">
+        <div class="detail"><span class="label">服务详情</span><span>商户将每隔30天，自动从你的支付宝账户扣款252元进行续费。</span></div>
+        <div class="detail"><span class="label">下次扣款</span><span>30天后从支付宝扣 ¥ 252.00</span></div>
+        <div class="detail"><span class="label">支付宝账号</span><span>zhi***@163.com</span></div>
+        <div class="detail"><span class="label">商家端账号</span><span>中国铁塔</span></div>
+      </section>
+      <div class="method"><span>扣款方式</span><span class="method-value">按设置的扣款顺序支付 <span class="chevron">›</span></span></div>
+      <p class="consent">开通则表示你同意 <span>《付款授权服务协议》</span></p>
+      <button class="pay" type="button">付款并开通</button>
+    </div>
+  </main>
+  <script>
+    const toggle = document.querySelector('.switch');
+    const pay = document.querySelector('.pay');
+    toggle.addEventListener('click', () => {
+      const enabled = toggle.getAttribute('aria-checked') !== 'true';
+      toggle.setAttribute('aria-checked', String(enabled));
+      pay.disabled = !enabled;
+    });
+    pay.addEventListener('click', () => { location.href = './order-result.html'; });
+  </script>
+</body>
+</html>
