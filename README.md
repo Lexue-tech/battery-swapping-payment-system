@@ -1,37 +1,24 @@
-# 铁塔换电支付系统 - 先享后付签约Demo
+# 铁塔换电支付系统静态演示
 
-## 项目说明
-本项目为纯前端H5 Demo，用于演示"先享后付"套餐的支付宝签约流程。
+基于 HTML、CSS 和原生 JavaScript 的静态演示，展示铁塔入口、小程序订单办理和账单缴费流程，以及模拟的支付宝支付页面。无需后端或构建步骤。
 
-**特点：**
-- 纯前端实现，无后端接口
-- 模拟完整签约流程
-- 页面间数据通过URL参数传递
+## 本地预览
 
-## 签约流程
-```
-铁塔收银台 → 订单确认(信息) → 订单确认(告知书) → 人脸识别 → 支付宝签约 → 签约成功
-```
+直接打开 `src/index.html`，或运行 `./deploy/start_local.sh` 后访问终端显示的地址。
 
-## 页面说明
-| 页面 | 文件 | 说明 |
-|------|------|------|
-| 导航菜单 | index.html | 页面导航与快捷入口 |
-| 铁塔收银台 | pages/cashier.html | 套餐展示，购买入口 |
-| 订单确认-信息 | pages/order-confirm.html | 订单详情确认 |
-| 套餐协议 | pages/agreement.html | 协议阅读确认 |
-| 人脸识别 | pages/alipay-face.html | 模拟人脸认证 |
-| 支付宝签约 | pages/alipay-sign.html | 模拟支付宝签约 |
-| 支付密码 | pages/alipay-password.html | 确认支付 |
-| 签约成功 | pages/sign-success.html | 签约并支付完成 |
-| 铁塔订单页 | pages/tower-order-success.html | 最终结果展示 |
+## 演示流程
 
-## 运行方式
-直接用浏览器打开 `src/index.html` 即可查看导航菜单。
+- 订单：铁塔收银台 → 订单确认 → 阅读并同意分期换电业务服务协议 → 模拟支付宝认证、签约和支付 → 办理结果 → 返回铁塔。
+- 账单：从导航进入账单缴费 → 模拟支付宝支付 → 缴费结果。
+- 导航页可以直接预览办理中、办理取消、支付处理中、账单关闭及暂不可缴费状态。
 
-如需从业务主流程开始体验，请打开 `src/pages/cashier.html`。
+演示使用本地示例数据，支付和状态结果均为模拟；浏览器页面用于展示小程序的内容和布局。
 
-## 技术栈
-- HTML5
-- CSS3
-- JavaScript (原生)
+## 文件
+
+- `src/pages/order-confirm.html`：订单确认及协议弹层。
+- `src/pages/order-result.html`：订单办理结果。
+- `src/pages/bill-detail.html`、`src/pages/bill-result.html`：账单缴费及结果。
+- `src/assets/js/mini-demo.js`：页面数据和交互。
+- `src/assets/js/service-agreement.js`：与小程序一致的协议内容。
+- `src/assets/css/mini-demo.css`：小程序页面样式。

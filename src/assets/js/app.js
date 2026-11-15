@@ -13,7 +13,7 @@ function readOrder() {
       originalAmount: 900,
       period: "90天",
       city: "济南市",
-      orderNo: `2026${Date.now()}`.slice(0, 16),
+      orderNo: "2026178348451789",
       installment: "3个月",
       stageInfo: "每期252元"
     };

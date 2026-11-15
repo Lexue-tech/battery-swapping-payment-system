@@ -1,62 +1,10 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="description" content="先享后付签约并支付成功演示页，展示订单信息、金额与返回商户动作。">
-  <title>先享后付支付系统 - 签约并支付完成</title>
-  <link rel="stylesheet" href="../assets/css/styles.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="refresh" content="0;url=./order-result.html">
+  <title>办理结果</title>
 </head>
-<body>
-  <main class="mobile-page payment-result-page">
-    <div class="topbar">
-      <button class="left" type="button" aria-label="关闭并返回商户" id="closeResult">×</button>
-      银行卡付款
-    </div>
-
-    <div class="success-icon">✓</div>
-    <h1 class="payment-result-title">签约并支付成功</h1>
-
-    <section class="section payment-result-panel">
-      <div class="payment-result-row">
-        <div class="payment-result-label">商户订单<br>信息</div>
-        <div class="payment-result-value" id="merchantOrderText"></div>
-      </div>
-      <div class="payment-result-row">
-        <div class="payment-result-label">金额</div>
-        <div class="payment-result-value price" id="amountText"></div>
-      </div>
-    </section>
-
-    <button class="btn btn-blue success-btn" type="button" id="backMerchant">返回商户</button>
-    <div class="success-note"><span id="autoSec">4</span>s后自动返回</div>
-  </main>
-  <script src="../assets/js/app.js"></script>
-  <script>
-    const order = readOrder();
-    const amount = Number(order.amount || 756);
-    const amountText = Number.isInteger(amount) ? `${amount}元` : `${toFixedAmount(amount)}元`;
-    const merchantOrderText = "先享后付特价756元季卡";
-
-    updateAmountText("#merchantOrderText", merchantOrderText);
-    updateAmountText("#amountText", amountText);
-
-    function backToMerchant() {
-      go("./tower-order-success.html");
-    }
-
-    document.getElementById("closeResult").addEventListener("click", backToMerchant);
-    document.getElementById("backMerchant").addEventListener("click", backToMerchant);
-
-    let sec = 4;
-    const timer = setInterval(() => {
-      sec -= 1;
-      updateAmountText("#autoSec", sec);
-      if (sec <= 0) {
-        clearInterval(timer);
-        backToMerchant();
-      }
-    }, 1000);
-  </script>
-</body>
+<body><p>正在打开办理结果，<a href="./order-result.html">点击查看</a>。</p></body>
 </html>
