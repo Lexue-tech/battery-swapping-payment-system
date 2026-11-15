@@ -4,7 +4,7 @@
 
 ## 本地预览
 
-直接打开 `src/index.html`，或运行 `./deploy/start_local.sh` 后访问终端显示的地址。
+直接打开 `src/index.html`。
 
 ## 演示流程
 
