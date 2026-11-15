@@ -1,0 +1,4 @@
+interface:
+  display_name: "Chrome DevTools Screenshots"
+  short_description: "用 Chrome DevTools 批量生成页面截图。"
+  default_prompt: "Use $chrome-devtools-screenshots to capture one or more pages with a specific device or viewport and save the screenshots."

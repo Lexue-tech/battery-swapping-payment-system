@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="铁塔换电收银台演示页，展示套餐选择、协议勾选与支付入口。">
+  <title>铁塔换电APP - 收银台</title>
+  <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+  <main class="mobile-page has-bottom-action cashier-page">
+    <div class="topbar">
+      <button class="left" type="button" aria-label="返回导航页" onclick="go('../index.html')">‹</button>
+      购买套餐
+    </div>
+    <section class="section" style="background: linear-gradient(180deg,#d9fffb 0%,#f6fffe 100%);">
+      <div style="font-size:22px;color:#4b5563;line-height:1.45;">
+        为您展示【济南市】地区套餐，<br>如需查看其他地域套餐，请修改我的用地
+      </div>
+    </section>
+    <section class="section">
+      <div class="chip-row">
+        <div class="chip">电池电压 全部</div>
+        <div class="chip">48V·新国标</div>
+        <div class="chip">60V·电轻摩</div>
+      </div>
+      <div class="chip-row">
+        <div class="chip">电池容量 全部</div>
+        <div class="chip">20Ah</div>
+        <div class="chip">25Ah</div>
+        <div class="chip">30Ah</div>
+      </div>
+      <div class="chip-row">
+        <div class="chip">套餐类型 全部</div>
+        <div class="chip">不限次套餐</div>
+        <div class="chip">次卡套餐</div>
+      </div>
+    </section>
+    <section class="section" id="pkgList">
+      <div
+        class="pkg is-active"
+        data-package-name="900元季卡"
+        data-amount="756"
+        data-original-amount="900"
+        data-period="90天"
+        data-installment="3个月"
+        data-stage-info="每期252元"
+      >
+        <div class="battery-icon">🔋</div>
+        <div>
+          <div class="pkg-title">900元季卡</div>
+          <div class="pkg-price">¥756 <span class="old">¥900</span></div>
+          <div class="pkg-tags">
+            <span>不限次数</span>
+            <span>租金可退</span>
+            <span>套餐说明</span>
+          </div>
+        </div>
+        <div class="pkg-badges">
+          <span class="badge badge-promo">先享后付<br>直降144元</span>
+        </div>
+      </div>
+      <div
+        class="pkg card"
+        data-package-name="济南60天换电套餐（超值推荐）"
+        data-amount="449"
+        data-original-amount="600"
+        data-period="60天"
+        data-installment="36月"
+        data-stage-info="第1期54.45元，第2-36期11.27元"
+      >
+        <div class="battery-icon">🔋</div>
+        <div>
+          <div class="pkg-title">济南60天换电套餐（超值推荐）</div>
+          <div class="pkg-price">¥449 <span class="old">¥600</span></div>
+        </div>
+      </div>
+      <div
+        class="pkg card"
+        data-package-name="济南30天换电套餐"
+        data-amount="229"
+        data-original-amount="300"
+        data-period="30天"
+        data-installment="36月"
+        data-stage-info="第1期27.80元，第2-36期5.73元"
+      >
+        <div class="battery-icon">🔋</div>
+        <div>
+          <div class="pkg-title">济南30天换电套餐</div>
+          <div class="pkg-price">¥229 <span class="old">¥300</span></div>
+        </div>
+      </div>
+    </section>
+    <div class="bottom-action">
+      <label class="agreement-check">
+        <input type="checkbox" id="agreeCheck">
+        请阅读并同意铁塔换电 <a href="./agreement.html?preview=1">《套餐协议》</a>
+      </label>
+      <button class="btn btn-primary" id="payBtn" disabled>立即支付</button>
+    </div>
+  </main>
+  <script src="../assets/js/app.js"></script>
+  <script>
+    const packageCards = Array.from(document.querySelectorAll("#pkgList .pkg"));
+    let selectedCard = packageCards[0];
+    const fixedOrderData = {
+      packageName: "900元季卡",
+      amount: 756,
+      originalAmount: 900,
+      period: "90天",
+      installment: "3个月",
+      stageInfo: "每期252元"
+    };
+
+    function selectPackage(card) {
+      selectedCard = card;
+      packageCards.forEach((item) => item.classList.toggle("is-active", item === card));
+    }
+
+    packageCards.forEach((card) => {
+      card.addEventListener("click", () => selectPackage(card));
+    });
+
+    const agreeCheck = document.getElementById("agreeCheck");
+    const payBtn = document.getElementById("payBtn");
+
+    function syncPayButtonState() {
+      payBtn.disabled = !agreeCheck.checked;
+    }
+
+    agreeCheck.addEventListener("change", syncPayButtonState);
+    window.addEventListener("pageshow", syncPayButtonState);
+    syncPayButtonState();
+
+    payBtn.addEventListener("click", () => {
+      saveOrder({
+        packageName: fixedOrderData.packageName,
+        amount: fixedOrderData.amount,
+        originalAmount: fixedOrderData.originalAmount,
+        period: fixedOrderData.period,
+        city: "济南市",
+        orderNo: `2026${Date.now()}`.slice(0, 16),
+        installment: fixedOrderData.installment,
+        stageInfo: fixedOrderData.stageInfo
+      });
+      go("./order-confirm.html");
+    });
+  </script>
+</body>
+</html>
