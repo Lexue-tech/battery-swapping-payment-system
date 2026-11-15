@@ -35,9 +35,11 @@
     document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && !dialog.hidden) close(); });
     orderButton.addEventListener('click', () => go('./alipay-periodic.html'));
   }
+  const billButton = document.getElementById('bill-pay');
+  if (billButton) billButton.addEventListener('click', () => go('./bill-result.html'));
   const title = document.getElementById('result-title');
   if (!title) return;
-  const isBill = false;
+  const isBill = location.pathname.endsWith('bill-result.html');
   const state = new URLSearchParams(location.search).get('state') || 'completed';
   const processing = state === 'processing';
   const completed = state === 'completed';
