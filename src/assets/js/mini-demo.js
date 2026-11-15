@@ -33,20 +33,11 @@
     document.getElementById('close-agreement').addEventListener('click', close);
     dialog.addEventListener('click', (event) => { if (event.target === dialog) close(); });
     document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && !dialog.hidden) close(); });
-    orderButton.addEventListener('click', () => { sessionStorage.setItem('mini_payment_kind', 'order'); go('./alipay-face.html'); });
-  }
-  const billButton = document.getElementById('bill-pay');
-  if (billButton) {
-    if (new URLSearchParams(location.search).get('state') === 'unavailable') {
-      billButton.disabled = true;
-      billButton.textContent = '暂不可缴费';
-      billButton.nextElementSibling.textContent = '账单尚未到缴费时间，请在开放缴费后再试。';
-    }
-    billButton.addEventListener('click', () => { sessionStorage.setItem('mini_payment_kind', 'bill'); go('./alipay-password.html'); });
+    orderButton.addEventListener('click', () => go('./alipay-periodic.html'));
   }
   const title = document.getElementById('result-title');
   if (!title) return;
-  const isBill = location.pathname.endsWith('bill-result.html');
+  const isBill = false;
   const state = new URLSearchParams(location.search).get('state') || 'completed';
   const processing = state === 'processing';
   const completed = state === 'completed';
@@ -75,5 +66,5 @@
     const content = document.createElement('strong'); content.textContent = value;
     row.append(name, content); details.append(row);
   });
-  back.addEventListener('click', () => go(isBill ? '../index.html' : './tower-order-success.html'));
+  back.addEventListener('click', () => go('../index.html'));
 })();

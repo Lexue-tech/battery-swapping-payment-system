@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>铁塔套餐详情（模拟）</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #edf1f5; color: #4b566b; font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", Arial, sans-serif; }
+    .page { max-width: 430px; min-height: 100vh; margin: auto; padding-bottom: 95px; background: #edf1f5; }
+    .topbar { position: relative; display: flex; align-items: center; justify-content: center; height: 48px; background: #fff; color: #172231; font-size: 16px; font-weight: 700; }
+    .back { position: absolute; left: 14px; border: 0; background: none; font-size: 27px; color: #20262b; }
+    .content { padding: 12px; }
+    .card { margin-bottom: 12px; padding: 16px; border-radius: 10px; background: #fff; }
+    .product { display: flex; align-items: center; gap: 14px; }
+    .battery { display: grid; place-items: center; flex: 0 0 72px; height: 72px; border-radius: 9px; background: #dff8f1; font-size: 34px; }
+    .battery img { width: 44px; height: 44px; filter: invert(56%) sepia(62%) saturate(580%) hue-rotate(120deg); }
+    .row-label, .row-right { display: flex; align-items: center; gap: 8px; }
+    .row-icon { width: 20px; height: 20px; }
+    .chevron { width: 20px; height: 20px; margin-left: 4px; }
+    .product h1 { margin: 0 0 9px; font-size: 18px; }
+    .price { color: #36cbb3; font-weight: 700; font-size: 17px; }
+    .product p { margin: 6px 0 0; font-size: 13px; }
+    .capacity { padding: 3px 5px; border-radius: 3px; background: #fff3e7; color: #f4a24e; white-space: nowrap; }
+    .tags { display: flex; gap: 5px; margin-top: 14px; }
+    .tags span { padding: 3px 7px; border-radius: 4px; background: #e5faf5; color: #39cbb3; font-size: 12px; }
+    .row { display: flex; align-items: center; justify-content: space-between; min-height: 58px; color: #252b30; font-size: 15px; }
+    .row-right { color: #b8bec5; font-size: 14px; }
+    .row-right em { color: #29b9a5; font-style: normal; }
+    .row-right b { margin-left: 10px; color: #18202a; font-size: 20px; font-weight: 400; }
+    .notice { padding: 3px 1px; }
+    .notice h2 { margin: 0 0 16px; color: #252b30; font-size: 16px; font-weight: 500; }
+    .notice p { margin: 0 0 9px; color: #80858b; font-size: 13px; line-height: 1.8; }
+    .footer { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: min(100%, 430px); display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px)); background: #fff; }
+    .total { color: #777; font-size: 15px; white-space: nowrap; }
+    .total strong { color: #df3444; font-size: 25px; }
+    .pay { min-width: 132px; padding: 11px 20px; border: 0; border-radius: 5px; background: #32cbb5; color: #fff; font-size: 17px; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="topbar"><button class="back" type="button" aria-label="返回" onclick="history.back()">‹</button>收银台</header>
+    <div class="content">
+      <section class="card">
+        <div class="product"><div class="battery"><img src="../assets/icons/battery-charging.svg" alt=""></div><div><h1>900元季卡</h1><div class="price">¥756</div><p>租期：90天</p><p>电池容量：<span class="capacity">48V30Ah</span></p></div></div>
+        <div class="tags"><span>不限换电池次数</span><span>租金不可退</span></div>
+      </section>
+      <div class="card row"><span class="row-label"><img class="row-icon" src="../assets/icons/wallet-cards.svg" alt="">优惠券</span><span class="row-right"><em>立即使用</em><img class="chevron" src="../assets/icons/chevron-right.svg" alt=""></span></div>
+      <div class="card row"><span class="row-label"><img class="row-icon" src="../assets/icons/coins.svg" alt="">电池押金 <span style="color:#29b9a5">（99）</span></span><span class="row-right">已缴纳<img class="chevron" src="../assets/icons/chevron-right.svg" alt=""></span></div>
+      <section class="notice">
+        <h2>套餐使用说明</h2>
+        <p style="color: #f12b2b;">1.该套餐仅限济南市使用</p>
+        <p>2.逾期说明：订单使用有效期结束请尽快归还资产，若订单到期仍未归还，则视为逾期，自第一自然日起，按照10元/日标准计算逾期费用。</p>
+        <p>3.资产丢失说明：若您持有的资产发生丢失或长期逾期情况，需进行赔付，未按期缴纳赔款将影响您的信用值。</p>
+        <p>4.押金退费说明：可退套餐，需先退电池租金再退押金；不可退套餐，请直接申请押金退款。计于1-7个工作日返还至您原账户。</p>
+      </section>
+    </div>
+    <footer class="footer"><span class="total">合计： <strong>¥756.00</strong></span><button class="pay" type="button" onclick="location.href='./order-confirm.html'">立即支付</button></footer>
+  </main>
+</body>
+</html>

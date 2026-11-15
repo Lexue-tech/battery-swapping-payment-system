@@ -1025,3 +1025,50 @@ a {
   font-size: 14px;
   z-index: 40;
 }
+
+/* 铁塔收银台：按手机页面比例收紧内容。 */
+.cashier-page .topbar { height: 48px; font-size: 16px; }
+.cashier-page .section { padding: 10px 12px; }
+.cashier-page .cashier-location { color: #6b7280; font-size: 12px; line-height: 1.5; }
+.cashier-page .chip-row { gap: 6px; padding-bottom: 6px; }
+.cashier-page .chip { padding: 5px 9px; font-size: 12px; }
+.cashier-page .pkg { grid-template-columns: 54px minmax(0, 1fr) auto; gap: 9px; padding: 10px; margin-bottom: 9px; border-width: 1px; }
+.cashier-page .battery-icon { width: 54px; height: 54px; font-size: 25px; }
+.cashier-page .pkg-title { font-size: 15px; line-height: 1.35; margin-bottom: 4px; }
+.cashier-page .pkg-price { font-size: 19px; line-height: 1.3; }
+.cashier-page .pkg-price .old { font-size: 13px; margin-left: 4px; }
+.cashier-page .pkg-tags { gap: 5px; font-size: 11px; }
+.cashier-page .pkg-badges { grid-column: auto; align-items: flex-end; margin-top: 0; }
+.cashier-page .badge-promo { padding: 6px; font-size: 10px; }
+.cashier-page .bottom-action { flex-wrap: nowrap; gap: 8px; padding: 10px 12px calc(10px + var(--safe-bottom)); }
+.cashier-page .agreement-check { flex: 1 1 auto; font-size: 11px; }
+.cashier-page .bottom-action .btn { flex: 0 0 auto; width: auto; height: 38px; padding: 0 16px; font-size: 14px; }
+
+/* 参考线上铁塔页面，保留演示套餐数据。 */
+.cashier-page { background: #f6f7fb; color: #4b556b; }
+.cashier-page .topbar { position: relative; border: 0; background: #d8f7f2; color: #172231; }
+.cashier-page .cashier-intro { padding: 18px 14px 20px; background: linear-gradient(120deg, #e8faf8, #c9f6e9); }
+.cashier-page .cashier-location { font-size: 13px; line-height: 1.65; }
+.cashier-page .cashier-location span { color: #32cbb2; }
+.cashier-page .cashier-intro + .section { background: #fff; border-radius: 12px 12px 0 0; padding-top: 13px; }
+.cashier-page .chip-row { align-items: center; gap: 6px; padding-bottom: 9px; scrollbar-width: none; }
+.cashier-page .filter-label { flex: 0 0 68px; color: #414d62; font-size: 13px; white-space: nowrap; }
+.cashier-page .chip { min-width: 58px; text-align: center; border: 1px solid #edf0f3; color: #566175; background: #fff; }
+.cashier-page .chip.selected { border-color: #82e4d5; color: #31c9b2; background: #eafbf8; }
+.cashier-page #pkgList { background: #f6f7fb; padding: 12px; }
+.cashier-page .pkg { position: relative; grid-template-columns: 68px minmax(0, 1fr) auto; gap: 10px; padding: 13px 10px; margin-bottom: 12px; background: #fff; border: 1px solid transparent; border-radius: 11px; box-shadow: none; }
+.cashier-page .pkg.is-active { background: #fff; border-color: #37cdb7; }
+.cashier-page .battery-icon { width: 68px; height: 68px; align-self: center; background: #dff8f1; font-size: 32px; }
+.cashier-page .pkg-title { color: #4b566d; font-size: 16px; }
+.cashier-page .pkg-price { color: #38cbb5; font-size: 17px; margin: 5px 0; }
+.cashier-page .pkg-price .old { color: #a7dfd5; }
+.cashier-page .pkg-info { font-size: 12px; line-height: 1.9; }
+.cashier-page .capacity { padding: 2px 4px; border-radius: 3px; background: #fff4e8; color: #f6a650; white-space: nowrap; }
+.cashier-page .pkg-tags span { padding: 2px 5px; border-radius: 3px; background: #e6faf6; color: #36c9b0; }
+.cashier-page .bottom-action { align-items: center; box-shadow: none; border: 0; padding: 12px 12px calc(12px + var(--safe-bottom)); }
+.cashier-page .cashier-summary { flex: 1; min-width: 0; }
+.cashier-page .cashier-summary strong { display: block; color: #4b566d; font-size: 18px; margin-bottom: 5px; }
+.cashier-page .agreement-check { display: flex; align-items: center; font-size: 11px; white-space: nowrap; }
+.cashier-page .agreement-check input { margin: 0 5px 0 0; }
+.cashier-page .agreement-check span { color: #2bc9b2; }
+.cashier-page .bottom-action .btn { border-radius: 30px; background: #30ceb5; box-shadow: 0 2px 6px #b9dcd5; }
